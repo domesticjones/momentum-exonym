@@ -1,10 +1,10 @@
 /**
   Font Families & Settings
   ---------------------------------------------------------------------- */
-@import url("https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i");
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,700i&display=swap');
 
-$font-default: "Lato", sans-serif;
-$font-heading: "Lato", sans-serif;
+$font-default: 'Nunito Sans', sans-serif;
+$font-heading: 'Nunito Sans', sans-serif;
 
 $font-size: 16px;
 
@@ -127,32 +127,34 @@ h6 {
   margin: 0;
   line-height: 1;
   font-family: $font-heading;
-
   @include fontBold();
 }
 
 h1 {
   font-size: 2.5em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
+  color: $purple;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 0.5em;
+  color: $blue;
 }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.15em;
   margin-bottom: 1em;
+  color: $purple;
 }
 
 h4 {
-  font-size: 1.25em;
+  font-size: 1em;
   margin-bottom: 1em;
 }
 
 h5 {
-  font-size: 1em;
+  font-size: 0.85em;
   margin-bottom: 1em;
   text-transform: uppercase;
 }

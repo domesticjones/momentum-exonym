@@ -1,8 +1,24 @@
 /**
   Global Website Footer
   ---------------------------------------------------------------------- */
-.nav-footer {
-  @include navMenu(vertical);
+#affiliates {
+  @include navMenu(horizontal);
+  @include grid(center, center);
+  padding: 2rem 2rem 4rem 2rem;
+
+  ul {
+    @include grid(center, center, row, wrap);
+
+    li {
+      margin: 0.25em;
+    }
+  }
+
+  img {
+    display: block;
+    height: 5rem;
+    width: auto;
+  }
 }
 
 /**
