@@ -21,6 +21,169 @@
   }
 }
 
+#footer {
+  @include grid(space-around, stretch);
+  background-color: $purple;
+  color: $white;
+  font-size: 0.85em;
+  padding: 4em 0;
+
+  a {
+    color: $white;
+    white-space: nowrap;
+    @include transition();
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  .nav-phone,
+  .nav-address {
+    margin-bottom: 1em;
+    padding-left: 1.75em;
+    position: relative;
+    line-height: 1.5;
+
+    a::before,
+    i::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.15em;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+    }
+
+    a::before {
+      @include icon(phone-yellow);
+    }
+
+    i {
+      @include fontItalic(false);
+      white-space: pre;
+
+      &::before {
+        @include icon(pin-yellow);
+      }
+    }
+  }
+}
+
+.footer-column {
+  padding: 0 2em;
+
+  nav {
+    @include navMenu(vertical);
+  }
+
+  .cta-schedule {
+    display: inline;
+    background-color: transparent;
+    padding: 0;
+    @include fontBold(false);
+    text-transform: none;
+
+    &::before {
+      display: none;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: $yellow !important;
+    }
+  }
+}
+
+.footer-column-border {
+  border-left: 4px solid $aqua;
+}
+
+.footer-title {
+  white-space: nowrap;
+  color: $yellow;
+  text-transform: uppercase;
+}
+
+.footer-logo {
+  display: block;
+  height: 3em;
+}
+
+.copyright {
+  font-size: 0.85em;
+  margin-top: 2em;
+}
+
+.certifications {
+  @include listStripped(inline-block);
+  max-width: 480px;
+  font-size: 0.85em;
+
+  li {
+    position: relative;
+    z-index: 0;
+    border: 1px solid $blue;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    background-color: $purple;
+    cursor: default;
+    @include transition();
+
+    &:hover {
+      transform: scale(1.25);
+      z-index: 1;
+    }
+  }
+}
+
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
+@media (max-width: 1156px) {
+  .certifications li {
+    padding: 0.5em;
+  }
+}
+
+@media (max-width: 1024px) {
+  #footer {
+    @include grid(center, flex-start, row, wrap);
+
+    .nav-address,
+    .nav-phone {
+      padding-left: 0;
+    }
+  }
+
+  .footer-column {
+    text-align: center;
+    margin-bottom: 3em;
+  }
+
+  .footer-logo {
+    margin: 2em auto;
+  }
+
+  .footer-brand { order: 1; width: 100%; .copyright { display: none; }}
+  .footer-contact { order: 4; width: 100%; .footer-title { display: none; } a::before, i::before { display: none !important; }}
+  .footer-services { order: 2; width: 50%; }
+  .footer-quick { order: 3; width: 50%; margin-bottom: auto; }
+  .footer-certs { order: 5; width: 100%; }
+
+  .certifications {
+    margin: 0 auto;
+  }
+
+  .footer-column-border {
+    border: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #footer {
+    padding: 1em 0;
+  }
+}

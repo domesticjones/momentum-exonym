@@ -127,11 +127,23 @@ body {
 }
 
 @media (max-width: 480px) {
-  #header .cta-button {
-    padding-right: 0.35em;
+  body {
+    padding-top: 4.5rem
+  }
 
-    span {
-      display: none;
+  #header {
+    padding: 1em;
+
+    .cta-button {
+      padding-right: 0.35em;
+
+      span {
+        display: none;
+      }
     }
+  }
+
+  .header-logo {
+    margin-right: 2em;
   }
 }

@@ -6,10 +6,12 @@ body {
   max-width: 100%;
 }
 
-.wrap {
-  margin: 0 auto;
-  max-width: 100%;
-  position: relative;
+body {
+  background-color: $purple;
+}
+
+#container {
+  background-color: $white;
 }
 
 /**
@@ -39,21 +41,3 @@ a {
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
-@media (min-width: 1025px) {
-  .wrap {
-    width: 1150px;
-  }
-}
-
-@media (min-width: 1400px) {
-  .wrap {
-    width: 1400px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .wrap {
-    width: 100%;
-    padding: 0 2rem;
-  }
-}

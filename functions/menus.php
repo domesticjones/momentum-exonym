@@ -12,7 +12,7 @@ add_theme_support('menus');
 register_nav_menus(
   array(
     'header-menu' => __('Header', 'exonym'),
-    'footer-menu' => __('Footer', 'exonym'),
+    'services-menu' => __('Services', 'exonym'),
     'responsive-menu' => __('Responsinve', 'exonym')
   )
 );

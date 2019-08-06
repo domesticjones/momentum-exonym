@@ -7,6 +7,8 @@
   top: 0;
   left: 0;
   width: 100%;
+  max-height: 100vh;
+  overflow: auto;
   font-size: 0.85em;
   @include navMenu(vertical);
   background-color: $blue;
@@ -57,6 +59,29 @@
 
     &::before {
       display: none;
+    }
+  }
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  #nav-responsive {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  #nav-responsive {
+    padding-top: 5.5rem;
+
+    ul li {
+      padding: 0;
+    }
+
+    a {
+      padding: 0.5em;
     }
   }
 }
