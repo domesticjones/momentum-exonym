@@ -1,6 +1,10 @@
 // Mixin for creating basic transitions
-@mixin transition($transition: all 350ms ease) {
-  transition: $transition;
+@mixin transition($transition: default) {
+  @if $transition == default {
+      transition: all 666ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  } @else {
+    transition: $transition;
+  }
 }
 
 // Apply a gaussian blur to an image in px, em, rem

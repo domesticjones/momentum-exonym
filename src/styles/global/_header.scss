@@ -9,6 +9,76 @@
   right: 0;
 }
 
+#header {
+  @include grid(space-between, center);
+  background-color: $purple;
+  padding: 2rem;
+}
+
+.header-logo {
+  display: block;
+  height: 3.5rem;
+  width: auto;
+}
+
+.header-nav {
+  @include navMenu(dropdown);
+
+  a {
+    padding: 1em;
+    color: $white;
+    text-transform: uppercase;
+    @include fontBold();
+    @include transition();
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $yellow;
+    }
+  }
+
+  .menu-item-has-children {
+    & > a {
+      &::after {
+        content: '';
+        display: inline-block;
+        margin-left: 0.5em;
+        width: 0.5em;
+        height: 0.5em;
+        @include icon(arrowDownAlt-white);
+        @include transition();
+      }
+
+      &:hover::after {
+        @include icon(arrowDownAlt-yellow);
+      }
+    }
+  }
+
+  .sub-menu {
+    background-color: $white;
+    left: 1rem;
+
+    a {
+      border: 1px solid $grey;
+      padding: 0.5em 1em;
+      color: $purple;
+      text-transform: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $blue;
+      }
+    }
+  }
+}
+
+#header-nav-toggle {
+  display: none;
+}
+
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */

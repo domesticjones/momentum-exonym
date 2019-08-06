@@ -7,7 +7,7 @@ export default {
   	$('iframe, embed, video').not('.ignore-ratio').wrap('<div class="video-container" />');
 
   	// HEADER: Responsive Nav Toggle
-  	$('#responsive-nav-toggle').click(e => {
+  	$('#header-nav-toggle').click(e => {
   		const $this = $(e.currentTarget);
   		$this.toggleClass('is-active');
   	});

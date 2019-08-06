@@ -2,6 +2,6 @@
   Responsive Navigation
   ---------------------------------------------------------------------- */
 
-#responsive-nav-toggle {
+#header-nav-toggle {
   @include hamburgerMenu(9, $black, 0.75);
 }

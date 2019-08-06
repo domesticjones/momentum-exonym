@@ -1,0 +1,15 @@
+/**
+  Icons Mixin
+  ---------------------------------------------------------------------- */
+@mixin icon($style) {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  @if $style == 'arrowDownAlt-white' {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjciIHZpZXdCb3g9IjAgMCA4IDciPjxwYXRoIGQ9Ik00LDAsOCw3SDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4IDcpIHJvdGF0ZSgxODApIiBmaWxsPSIjZmZmIi8+PC9zdmc+);
+  }
+  @else if $style == 'arrowDownAlt-yellow' {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjciIHZpZXdCb3g9IjAgMCA4IDciPjxwYXRoIGQ9Ik00LDAsOCw3SDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4IDcpIHJvdGF0ZSgxODApIiBmaWxsPSIjZmZkODAwIi8+PC9zdmc+);
+  }
+}
