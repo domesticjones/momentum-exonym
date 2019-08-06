@@ -1,6 +1,13 @@
 /**
   Global Website Header
   ---------------------------------------------------------------------- */
+#tagline {
+  position: fixed;
+  z-index: -999;
+  opacity: 0;
+  bottom: 0;
+  right: 0;
+}
 .header-top {
   padding: 1rem 0;
   z-index: 9999;

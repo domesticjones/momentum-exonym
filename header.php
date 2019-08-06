@@ -8,6 +8,7 @@
 	</head>
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
 		<div id="container">
+			<header id="tagline"><h1><?php bloginfo('description'); ?></h1></header>
       <header id="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
         <div class="wrap">
           <a href="<?php echo get_home_url(); ?>">
