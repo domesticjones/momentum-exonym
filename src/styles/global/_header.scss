@@ -9,20 +9,35 @@
   right: 0;
 }
 
+body {
+  padding-top: 7.5rem;
+}
+
 #header {
+  position: fixed;
+  z-index: 999;
   @include grid(space-between, center);
   background-color: $purple;
-  padding: 2rem;
+  padding: 2em;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .header-logo {
   display: block;
-  height: 3.5rem;
-  width: auto;
+  height: 3.5em;
+
+  img {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
 }
 
 .header-nav {
   @include navMenu(dropdown);
+  margin: 0 1em 0 auto;
 
   a {
     padding: 1em;
@@ -76,9 +91,47 @@
 }
 
 #header-nav-toggle {
+  @include hamburgerMenu(2, $white, 0.4);
+  padding: 0.85em;
+  border-radius: 4px;
+  background-color: $blue;
+  margin-left: 1em;
   display: none;
 }
 
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
+@media (max-width: 1156px) {
+  body {
+    padding-top: 6.25rem
+  }
+
+  #header {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-logo {
+    margin-right: auto;
+  }
+
+  #header-nav-toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  #header .cta-button {
+    padding-right: 0.35em;
+
+    span {
+      display: none;
+    }
+  }
+}

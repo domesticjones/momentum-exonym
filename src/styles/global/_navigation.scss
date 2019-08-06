@@ -1,7 +1,62 @@
 /**
   Responsive Navigation
   ---------------------------------------------------------------------- */
+#nav-responsive {
+  position: fixed;
+  z-index: 998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 0.85em;
+  @include navMenu(vertical);
+  background-color: $blue;
+  padding: 8rem 2rem 2em 2em;
+  text-align: center;
+  transform: translateY(-100%);
+  @include transition();
 
-#header-nav-toggle {
-  @include hamburgerMenu(9, $black, 0.75);
+  &.is-active {
+    transform: translateY(0);
+  }
+
+  ul {
+    @include grid(center, center, column);
+    font-size: 2em;
+
+    li {
+      padding: 0.5em;
+
+      &.menu-item-has-children {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  a {
+    display: block;
+    color: $white;
+    text-transform: uppercase;
+    padding: 0.25em;
+    @include fontBold();
+  }
+
+  ul.sub-menu {
+    @include grid(center, center, row, wrap);
+    font-size: 0.65em;
+
+    a {
+      padding: 0.5em;
+      text-transform: none;
+      color: $purple;
+    }
+  }
+
+  .cta-schedule {
+    font-size: 2em;
+    padding: 0.5em;
+
+    &::before {
+      display: none;
+    }
+  }
 }

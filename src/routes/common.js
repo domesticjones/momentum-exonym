@@ -10,6 +10,7 @@ export default {
   	$('#header-nav-toggle').click(e => {
   		const $this = $(e.currentTarget);
   		$this.toggleClass('is-active');
+  		$('#nav-responsive').toggleClass('is-active');
   	});
   },
   finalize() {

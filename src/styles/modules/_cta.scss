@@ -1,0 +1,34 @@
+.cta-button {
+  @include grid(center, center);
+  background-color: $blue;
+  padding: 0.9em 1em 0.75em 1em;
+  border-radius: 4px;
+  color: $white !important;
+  @include fontBold();
+  text-transform: uppercase;
+  line-height: 1.5;
+  @include transition();
+
+  &:hover {
+    background-color: $aqua;
+  }
+}
+
+.cta-schedule {
+  padding: 0.9em 1.25em 0.75em 1em;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 0.65em;
+    transform: translateY(-0.15em) scale(1);
+    @include icon(calendar-white);
+    @include transition();
+  }
+
+  &:hover::before {
+    transform: translateY(-0.15em) scale(1.1);
+  }
+}
