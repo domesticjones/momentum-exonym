@@ -50,14 +50,6 @@ body.hero-image-top {
   }
 }
 
-.hero-bg {
-  @each $bgName, $bgVal in $colorDeck {
-    &-#{$bgName} {
-      background-color: $bgVal;
-    }
-  }
-}
-
 .hero-affiliates {
   @include listStripped(inline-block);
   position: absolute;

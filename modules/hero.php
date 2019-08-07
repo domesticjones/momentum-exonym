@@ -8,7 +8,7 @@
   $gradStyle = null;
   $grad = $style['enable_gradient'];
   if($grad) { $gradStyle = ' hero-grad hero-grad-' . $style['gradient_color']; }
-  $classes = 'hero-' . $type . ' hero-bg-' . $style['background_color'] . $gradStyle;
+  $classes = 'hero-' . $type . ' module-bgcolor-' . $style['background_color'] . $gradStyle;
   echo ex_wrap('start', 'hero', $classes);
     echo ex_moduleBg($image['ID'], $imageOpacity);
     echo '<div class="module-inner">';

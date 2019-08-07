@@ -1,6 +1,21 @@
 .module {
   position: relative;
   overflow: hidden;
+
+  &.module-nopad {
+    &-top { padding-top: 0; }
+    &-right { padding-right: 0; }
+    &-bottom { padding-bottom: 0; }
+    &-left { padding-left: 0; }
+  }
+}
+
+.module-bgcolor {
+  @each $bgName, $bgVal in $colorDeck {
+    &-#{$bgName} {
+      background-color: $bgVal;
+    }
+  }
 }
 
 .module-inner {

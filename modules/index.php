@@ -39,6 +39,18 @@
 
   function ex_wrap($pos, $name = null, $class = null) {
     $output = '';
+    $bg = get_sub_field('background_color');
+    $pad = get_sub_field('padding_disable');
+    $padDeck = [];
+    if(!empty($pad)) {
+      foreach($pad as $p) {
+        array_push($padDeck, 'module-nopad-' . $p);
+      }
+      $class .= implode(' ', $padDeck) . ' ';
+    }
+    if($bg) {
+      $class .= 'module-bgcolor-' . $bg . ' ';
+    }
     if($pos == 'start') {
       $output .= '<section class="module module-' . $name . ' ' . $class . ' animate-parallax animate-z-normal">';
     } elseif($pos == 'end') {
