@@ -1,0 +1,9 @@
+.module {
+  position: relative;
+  overflow: hidden;
+}
+
+.module-inner {
+  position: relative;
+  z-index: 10;
+}

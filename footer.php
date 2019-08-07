@@ -1,3 +1,4 @@
+			</main>
 			<?php
 				if(have_rows('affiliates', 'options')) {
 					echo '<nav id="affiliates"><ul>';

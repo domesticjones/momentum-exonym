@@ -6,3 +6,14 @@ $purple: #1A0070;
 $yellow: #FFD800;
 $blue: #318DCB;
 $aqua: #44C0EB;
+
+$colorDeck: (
+  ('white', $white),
+  ('grey', $grey),
+  ('grey-dark', $grey-dark),
+  ('black', $black),
+  ('purple', $purple),
+  ('yellow', $yellow),
+  ('blue', $blue),
+  ('aqua', $aqua)
+);

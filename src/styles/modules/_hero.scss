@@ -1,0 +1,114 @@
+body.hero-image-top {
+  padding-top: 0;
+
+  #header {
+    background-color: transparent;
+  }
+}
+
+.module-hero {
+  @include grid(flex-start, center);
+  padding: 6rem 2rem;
+  color: $white;
+
+  h1 {
+    color: $white;
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    color: $yellow;
+    @include fontBold(false);
+    @include fontItalic();
+    font-size: 3em;
+    margin-bottom: 1em;
+  }
+}
+
+.hero-fullscreen {
+  min-height: 100vh;
+}
+
+.hero-grad {
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.666;
+  }
+
+  @each $gradName, $gradVal in $colorDeck {
+    &-#{$gradName}::after {
+      background-image: linear-gradient(to bottom, #{$gradVal} 0%, transparentize($gradVal, 1) 100%);
+    }
+  }
+}
+
+.hero-bg {
+  @each $bgName, $bgVal in $colorDeck {
+    &-#{$bgName} {
+      background-color: $bgVal;
+    }
+  }
+}
+
+.hero-affiliates {
+  @include listStripped(inline-block);
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+
+  li {
+    margin: 0.25em;
+  }
+
+  img {
+    display: block;
+    height: 4rem;
+    width: auto;
+  }
+}
+
+.hero-heading {
+  @include grid(center, center);
+  padding: 4em 0;
+
+  h2 {
+    font-size: 1.25em;
+    @include fontItalic(false);
+    @include fontBold();
+  }
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .module-hero {
+    @include grid(center, center, column);
+    text-align: center;
+    min-height: 50vh;
+    padding-top: 8rem;
+
+    h1 { font-size: 2.25em; }
+    h2 { font-size: 1.75em; }
+    h4 { display: none; }
+
+    &.hero-heading {
+      min-height: 30vh;
+      padding-top: 4em;
+
+      h2 { font-size: 1.25em; }
+    }
+  }
+
+  .hero-affiliates {
+    display: none;
+  }
+}

@@ -37,3 +37,4 @@
 					echo ex_scheduleCta();
 				?>
 			</nav>
+			<main role="main" aria-label="Content">

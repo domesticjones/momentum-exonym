@@ -4,8 +4,7 @@
 .animate-parallax {
   .module-bg {
     top: 0;
-    left: auto;
-    right: auto;
+    left: 0;
   }
 }
 
@@ -22,6 +21,14 @@
   }
 }
 
+.module-bg {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
 /**
   Parallax Animation
   ---------------------------------------------------------------------- */
@@ -30,7 +37,7 @@
 }
 
 .animate-z-normal .module-bg {
-  height: calc(100% + 8rem);
+  height: calc(100% + 10rem);
 }
 
 .animate-z-extreme .module-bg {

@@ -52,5 +52,14 @@ export default {
   			}
   		});
   	});
+
+    // HEADER: Add Class on Scroll
+    $(window).on('scroll', () => {
+      if($(window).scrollTop() > 50) {
+        $('#header').addClass('is-scrolled');
+      } else {
+        $('#header').removeClass('is-scrolled');
+      }
+    });
   },
 };
