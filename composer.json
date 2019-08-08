@@ -28,6 +28,7 @@
     "wpackagist-plugin/ari-adminer": "*",
     "wpackagist-plugin/favicon-by-realfavicongenerator": "*",
     "wpackagist-plugin/wp-sweep": "*",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*"
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "wpackagist-plugin/woocommerce": "3.6.5"
   }
 }
