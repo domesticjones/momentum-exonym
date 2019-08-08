@@ -1,0 +1,55 @@
+.module-numberlist {
+  padding: 4rem;
+}
+
+.numberlist-wrap {
+  @include listStripped();
+  @include grid(space-around, flex-start, row, wrap);
+
+  li {
+    padding: 0 2rem;
+    max-width: 25%;
+  }
+
+  .number {
+    @include grid(center, center);
+    height: 6rem;
+    font-size: 3rem;
+    color: $purple;
+    @include fontBold();
+    @include icon(emblem-yellow);
+  }
+
+  h2 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  p {
+    color: $blue;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .numberlist-wrap li {
+    max-width: 33%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .module-numberlist {
+    padding: 2rem;
+  }
+
+  .numberlist-wrap li {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .numberlist-wrap li {
+    max-width: 100%;
+    padding: 2rem 0;
+  }
+}

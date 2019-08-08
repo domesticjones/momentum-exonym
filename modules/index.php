@@ -48,6 +48,8 @@
           get_template_part('modules/metrocats');
         } elseif(get_row_layout() == 'image_content') {
           get_template_part('modules/imagecontent');
+        } elseif(get_row_layout() == 'numbered_list') {
+          get_template_part('modules/numberlist');
         }
       }
     } else {
@@ -74,9 +76,9 @@
       $class .= 'module-bgcolor-' . $bg;
     }
     if($pos == 'start') {
-      $output .= '<section class="module module-' . $name . ' ' . $class . ' animate-parallax animate-z-normal">';
+      $output = '<section class="module module-' . $name . ' ' . $class . ' animate-parallax animate-z-normal">';
     } elseif($pos == 'end') {
-      $output .= '</section>';
+      $output = '</section>';
     }
     return $output;
   }
