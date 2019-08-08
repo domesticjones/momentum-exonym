@@ -21,7 +21,7 @@
 	          ));
 					?>
         </nav>
-        <?php echo ex_scheduleCta(); ?>
+        <?php echo ex_cta('schedule', 'Schedule'); ?>
 				<a href="#" id="header-nav-toggle">
           <span class="line"></span>
           <span class="line"></span>
@@ -34,7 +34,7 @@
 						'container' => false,
 						'theme_location' => 'responsive-menu',
 					));
-					echo ex_scheduleCta();
+					echo ex_cta('schedule', 'Schedule');
 				?>
 			</nav>
 			<main role="main" aria-label="Content">

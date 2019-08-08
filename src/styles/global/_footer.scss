@@ -78,7 +78,12 @@
     @include navMenu(vertical);
   }
 
-  .cta-schedule {
+  .cta-wrap {
+    margin: 0;
+    display: inline;
+  }
+
+  .cta-icon-schedule {
     display: inline;
     background-color: transparent;
     padding: 0;

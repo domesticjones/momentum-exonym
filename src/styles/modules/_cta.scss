@@ -1,3 +1,8 @@
+.cta-wrap {
+  @include grid(center, center);
+  margin-top: 2rem;
+}
+
 .cta-button {
   @include grid(center, center);
   background-color: $blue;
@@ -14,7 +19,7 @@
   }
 }
 
-.cta-schedule {
+.cta-icon-schedule {
   padding: 0.9em 1.25em 0.75em 1em;
 
   &::before {
@@ -30,5 +35,24 @@
 
   &:hover::before {
     transform: translateY(-0.15em) scale(1.1);
+  }
+}
+
+.cta-icon-arrow {
+  padding: 0.85em 1em 0.85em 1.25em;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    margin-left: 0.65em;
+    transform: translateY(-0.05em) scale(1);
+    @include icon(arrowRight-white);
+    @include transition();
+  }
+
+  &:hover::after {
+    transform: translateY(-0.05em) scale(1.25);
   }
 }

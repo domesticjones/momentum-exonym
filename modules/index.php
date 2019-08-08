@@ -1,14 +1,29 @@
 <?php
-  function ex_scheduleCta($text = 'Schedule') {
-    $link = '#schedule';
-    if(is_user_logged_in()) {
-      $link = '#scheduleLink';
+  function ex_cta($type = null, $text = null) {
+    $output = '';
+    if(!$type) {
+      $type = get_sub_field('cta_type');
     }
-    return '<a href="' . $link . '" class="cta-button cta-schedule"><span>' . $text . '</span></a>';
-  }
-
-  function ex_cta() {
-    var_dump('cta');
+    if($type == 'schedule') {
+      if($text) {
+        $textPrint = $text;
+      } else {
+        $textPrint = get_sub_field('cta_schedule_text');
+      }
+      $linkPrint = '#schedule';
+      if(is_user_logged_in()) {
+        $linkPrint = '#scheduleLink';
+      }
+    } elseif($type == 'custom') {
+      $linkPrint = get_sub_field('cta_link')['url'];
+      $textPrint = get_sub_field('cta_link')['title'];
+      $targetPrint = get_sub_field('cta_link')['target'];
+      $type = 'arrow';
+    }
+    if($type != 'none') {
+      $output = '<div class="cta-wrap"><a href="' . $linkPrint . '" class="cta-button cta-icon-' . $type . '"><span>' . $textPrint . '</span></a></div>';
+    }
+    return $output;
   }
 
   function ex_contentBodyClass($classes) {
