@@ -31,6 +31,8 @@
           get_template_part('modules/fullwidth');
         } elseif(get_row_layout() == 'metro_categories') {
           get_template_part('modules/metrocats');
+        } elseif(get_row_layout() == 'image_content') {
+          get_template_part('modules/imagecontent');
         }
       }
     } else {
@@ -44,6 +46,9 @@
     $bg = get_sub_field('background_color');
     $pad = get_sub_field('padding_disable');
     $padDeck = [];
+    if($class != null) {
+      $class .= ' ';
+    }
     if(!empty($pad)) {
       foreach($pad as $p) {
         array_push($padDeck, 'module-nopad-' . $p);
@@ -51,7 +56,7 @@
       $class .= implode(' ', $padDeck) . ' ';
     }
     if($bg) {
-      $class .= 'module-bgcolor-' . $bg . ' ';
+      $class .= 'module-bgcolor-' . $bg;
     }
     if($pos == 'start') {
       $output .= '<section class="module module-' . $name . ' ' . $class . ' animate-parallax animate-z-normal">';
@@ -63,7 +68,7 @@
 
   function ex_moduleBg($id, $style = null) {
     $styleOutput = ' style="background-image: url(' . wp_get_attachment_image_url($id, 'jumbo') . ');' . $style . '"';
-    $output = '<div class="module-bg"' . $styleOutput . '></div>';
+    $output = '<div class="module-bg"' . $styleOutput . '>' . wp_get_attachment_image($id, 'jumbo') . '</div>';
     return $output;
   }
 
