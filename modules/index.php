@@ -50,6 +50,8 @@
           get_template_part('modules/imagecontent');
         } elseif(get_row_layout() == 'numbered_list') {
           get_template_part('modules/numberlist');
+        } elseif(get_row_layout() == 'staff') {
+          get_template_part('modules/staff');
         }
       }
     } else {

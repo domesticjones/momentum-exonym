@@ -1,0 +1,81 @@
+.module-staff {
+  padding: 2rem;
+}
+
+.staff-wrap {
+  @include listStripped();
+  @include grid(center, flex-start, row, wrap);
+
+  li {
+    padding: 2rem;
+    width: 20%;
+    border-radius: 100%;
+    text-align: center;
+  }
+
+  figure {
+    display: block;
+    background-color: $blue;
+    background-size: cover;
+    background-position: center center;
+    height: 1rem;
+    padding-top: 100%;
+    border-radius: 100%;
+
+    img {
+      display: none;
+    }
+  }
+
+  h2 {
+    margin: 1em 0;
+  }
+
+  p {
+    @include fontBold();
+  }
+
+  a {
+    @include transition();
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .staff-wrap li {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 1376px) {
+  .staff-wrap li {
+    width: 25%;
+  }
+}
+
+@media (max-width: 1156px) {
+  .staff-wrap li {
+    width: 33.333%;
+  }
+}
+
+@media (max-width: 960px) {
+  .staff-wrap li {
+    width: 50%;
+  }
+}
+
+@media (max-width: 660px) {
+  .staff-wrap li {
+    width: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-wrap li {
+    width: 100%;
+  }
+}

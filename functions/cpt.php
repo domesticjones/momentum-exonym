@@ -164,6 +164,59 @@ function cpt_resource() {
 		'capability_type'       => 'page',
 	);
 	register_post_type( 'resource', $args );
-
 }
 add_action( 'init', 'cpt_resource', 0 );
+
+// CPT: Staff
+function cpt_staff() {
+	$labels = array(
+		'name'                  => _x( 'Staff', 'Post Type General Name', 'exonym' ),
+		'singular_name'         => _x( 'Staff Member', 'Post Type Singular Name', 'exonym' ),
+		'menu_name'             => __( 'Staff', 'exonym' ),
+		'name_admin_bar'        => __( 'Staff', 'exonym' ),
+		'archives'              => __( 'Staff Archives', 'exonym' ),
+		'attributes'            => __( 'Staff Attributes', 'exonym' ),
+		'parent_item_colon'     => __( 'Parent Staff Member:', 'exonym' ),
+		'all_items'             => __( 'All Staff Members', 'exonym' ),
+		'add_new_item'          => __( 'Add New Staff Member', 'exonym' ),
+		'add_new'               => __( 'Add New', 'exonym' ),
+		'new_item'              => __( 'New Staff Member', 'exonym' ),
+		'edit_item'             => __( 'Edit Staff Member', 'exonym' ),
+		'update_item'           => __( 'Update Staff Member', 'exonym' ),
+		'view_item'             => __( 'View Staff Member', 'exonym' ),
+		'view_items'            => __( 'View Staff Members', 'exonym' ),
+		'search_items'          => __( 'Search Staff Member', 'exonym' ),
+		'not_found'             => __( 'Not found', 'exonym' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'exonym' ),
+		'featured_image'        => __( 'Photo', 'exonym' ),
+		'set_featured_image'    => __( 'Set staff photo', 'exonym' ),
+		'remove_featured_image' => __( 'Remove staff photo', 'exonym' ),
+		'use_featured_image'    => __( 'Use as staff photo', 'exonym' ),
+		'insert_into_item'      => __( 'Insert into staff member', 'exonym' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this staff member', 'exonym' ),
+		'items_list'            => __( 'Staff Members list', 'exonym' ),
+		'items_list_navigation' => __( 'Staff Members list navigation', 'exonym' ),
+		'filter_items_list'     => __( 'Filter Staff Members list', 'exonym' ),
+	);
+	$args = array(
+		'label'                 => __( 'Staff Member', 'exonym' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'thumbnail' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 20,
+		'menu_icon'             => 'dashicons-id',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => false,
+		'can_export'            => true,
+		'has_archive'           => false,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'rewrite'               => false,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'staff', $args );
+}
+add_action( 'init', 'cpt_staff', 0 );
