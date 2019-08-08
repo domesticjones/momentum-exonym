@@ -12,7 +12,7 @@
       }
       $linkPrint = '#schedule';
       if(is_user_logged_in()) {
-        $linkPrint = '#scheduleLink';
+        $linkPrint = get_permalink(wc_get_page_id('shop'));
       }
     } elseif($type == 'custom') {
       $linkPrint = get_sub_field('cta_link')['url'];
