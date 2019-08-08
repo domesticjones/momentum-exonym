@@ -16,6 +16,7 @@ require_once('functions/plugins.php');
 require_once('functions/cpt.php');
 require_once('functions/exonym-business/exonym-business.php');
 require_once('modules/index.php');
+require_once('functions/woocommerce.php');
 
 /**
  * Theme assets
