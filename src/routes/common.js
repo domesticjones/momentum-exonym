@@ -54,7 +54,7 @@ export default {
   	});
 
     // HEADER: Add Class on Scroll
-    $(window).on('scroll', () => {
+    $(window).on('load resize scroll', () => {
       if($(window).scrollTop() > 50) {
         $('#header').addClass('is-scrolled');
       } else {

@@ -29,6 +29,8 @@
           get_template_part('modules/hero');
         } elseif(get_row_layout() == 'full_width') {
           get_template_part('modules/fullwidth');
+        } elseif(get_row_layout() == 'metro_categories') {
+          get_template_part('modules/metrocats');
         }
       }
     } else {
@@ -62,5 +64,14 @@
   function ex_moduleBg($id, $style = null) {
     $styleOutput = ' style="background-image: url(' . wp_get_attachment_image_url($id, 'jumbo') . ');' . $style . '"';
     $output = '<div class="module-bg"' . $styleOutput . '></div>';
+    return $output;
+  }
+
+  function ex_metrocats($cat) {
+    $img = $cat['image'];
+    $catId = $cat['category_info']['service_category'];
+    $headingPre = $cat['category_info']['pre_heading'];
+    $heading = $cat['category_info']['heading'];
+    $output = '<a href="' . get_term_link($catId) . '" class="metrocat-single" style="background-image: url(' . $img['sizes']['large'] . ')"><h2><span>' . $headingPre . '</span>' . $heading . '</h2></a>';
     return $output;
   }
