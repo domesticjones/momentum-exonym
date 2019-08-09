@@ -1,4 +1,11 @@
 <?php
+  // Disable Resources Archive until client is ready for implementation
+  wp_redirect(get_post_type_archive_link('service'), 302);
+  exit();
+  die;
+
+
+
   get_header();
   if(have_posts()) {
     echo '<h1>Resources Archive</h1>';
