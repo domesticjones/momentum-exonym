@@ -42,7 +42,9 @@
     if(have_rows('modules')) {
       while(have_rows('modules')) {
         the_row();
-        if(get_row_layout() == 'hero_image') {
+        if(get_row_layout() == 'contact_info') {
+          get_template_part('modules/contact');
+        } elseif(get_row_layout() == 'hero_image') {
           get_template_part('modules/hero');
         } elseif(get_row_layout() == 'full_width') {
           get_template_part('modules/fullwidth');

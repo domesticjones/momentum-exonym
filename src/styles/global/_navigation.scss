@@ -34,7 +34,7 @@
     }
   }
 
-  a {
+  a:not(.cta-button) {
     display: block;
     color: $white;
     text-transform: uppercase;
@@ -53,9 +53,10 @@
     }
   }
 
-  .cta-schedule {
+  .cta-icon-schedule {
     font-size: 2em;
     padding: 0.5em;
+    margin-top: 0;
 
     &::before {
       display: none;

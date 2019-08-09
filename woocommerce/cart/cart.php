@@ -19,8 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 //do_action( 'woocommerce_before_cart' );
 
-wc_get_template_part('header', 'schedule');
-
+/*
 ?>
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
@@ -163,10 +162,58 @@ wc_get_template_part('header', 'schedule');
 		 *
 		 * @hooked woocommerce_cross_sell_display
 		 * @hooked woocommerce_cart_totals - 10
-		 */
 	?>
 </div>
 
+*/
+
+	$shopId = wc_get_page_id('shop');
+	$previous = get_field('step_three', $shopId)['previous_button'];
+
+	echo ex_wrap('start', 'schedule-details');
+	wc_get_template_part('header', 'schedule');
+	echo '<aside class="inspection-details-sidebar">';
+		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+			$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+			$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
+
+
+
+			// Name & Services
+			echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', '<h2>' . $_product->get_name() . '</h2>', $cart_item, $cart_item_key ) . '&nbsp;' );
+
+			// Booking Date
+			echo wc_get_formatted_cart_item_data($cart_item);
+
+			// Remove
+			echo apply_filters('woocommerce_cart_item_remove_link', sprintf(
+				'<a href="%s" aria-label="%s" data-product_id="%s" data-product_sku="%s" class="inspection-cancel remove">' . $previous . '</a>',
+				esc_url(wc_get_cart_remove_url($cart_item_key)),
+				__('Cancel this Inspection', 'woocommerce'),
+				esc_attr($product_id),
+				esc_attr($_product->get_sku())
+			), $cart_item_key);
+		}
+	echo '</aside>';
+?>
+	<section class="schedule-details-info">
+		<form id="schedule-details">
+			<div class="form-row"><input type="text" id="details-supervisor-name" placeholder="Supervisor Name"></div>
+			<div class="form-row"><input type="text" id="details-supervisor-phone" placeholder="Supervisor Phone"></div>
+			<div class="form-row"><input type="number" id="details-sqft" placeholder="Total Square Feet"></div>
+			<div class="form-row"><input type="text" id="details-address" placeholder="Address"></div>
+			<div class="form-row"><input type="text" id="details-lot" placeholder="Lot/Block #"></div>
+			<div class="form-row"><input type="text" id="details-subdivision" placeholder="Subdivision"></div>
+			<div class="form-row">
+				<input type="text" id="details-city" placeholder="City">
+				<input type="text" id="details-state" placeholder="State" maxlength="2">
+				<input type="text" id="details-zip" placeholder="ZIP" maxlength="10">
+			</div>
+		</form>
+		<?php do_action('woocommerce_cart_collaterals'); ?>
+	</section>
 <?php
-	do_action( 'woocommerce_cart_collaterals' );
-	do_action( 'woocommerce_after_cart' ); ?>
+echo ex_wrap('end');
+	//do_action( 'woocommerce_after_cart' );
+?>

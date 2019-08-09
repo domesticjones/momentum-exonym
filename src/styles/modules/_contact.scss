@@ -1,0 +1,153 @@
+.module-contact-people,
+.module-contact-location {
+  padding: 2rem;
+  margin: 0 auto;
+  position: relative;
+
+  .module-inner {
+    @include grid(flex-start, stretch);
+  }
+}
+
+.module-contact-location {
+  background-color: $grey;
+}
+
+.module-contact-people {
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 3px;
+    height: calc(100% - 8rem);
+    left: 50%;
+    top: 4rem;
+    background-color: $blue;
+  }
+}
+
+.contact-form,
+.contact-directory,
+.contact-data,
+.contact-map {
+  padding: 2rem;
+}
+
+.contact-form,
+.contact-directory {
+  width: 50%;
+}
+
+.contact-form {
+  padding-right: 4rem;
+}
+
+.contact-directory {
+  padding-left: 4rem;
+
+  .module-staff {
+    padding: 0;
+  }
+
+  .staff-wrap {
+    display: block;
+    width: 100%;
+
+    li {
+      @include clearfix();
+      display: block;
+      width: 100%;
+      padding: 0 0 2rem 0;
+    }
+
+    figure {
+      float: left;
+      width: 6rem;
+      height: 6rem;
+      padding: 0;
+    }
+
+    h2,
+    p {
+      clear: none;
+      float: left;
+      text-align: left;
+      width: calc(100% - 6rem);
+      padding: 0 0 0 1rem;
+    }
+
+    h2 {
+      margin: 0 0 0.5em 0;
+    }
+
+    p {
+      font-size: 0.85em;
+      line-height: 1.25;
+    }
+  }
+}
+
+.contact-data {
+  widtH: 33.333%;
+
+  .nav-phone,
+  .nav-email {
+    @include navMenu(vertical);
+  }
+}
+
+.contact-map {
+  width: 66.666%;
+}
+
+.wpcf7-form {
+  p {
+    padding: 0;
+  }
+
+  br {
+    display: none;
+  }
+
+  .cta-wrap {
+    margin-top: 0;
+  }
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .contact-form,
+  .contact-directory,
+  .contact-data,
+  .contact-map {
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .module-contact-people,
+  .module-contact-location  {
+    .module-inner {
+      @include grid(center, center, column);
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-form,
+  .contact-data {
+    padding: 0;
+    margin-bottom: 4rem;
+  }
+
+  .contact-map,
+  .contact-directory {
+    padding: 0;
+    margin-bottom: 0;
+  }
+}

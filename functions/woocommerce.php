@@ -30,8 +30,7 @@
 ?>
   <form id="checkout_form" method="POST" action="<?php echo $checkoutUrl; ?>">
     <input type="hidden" name="customer_notes" id="customer_notes" value="">
-      <a href="#" onclick="document.getElementById('customer_notes').value=document.getElementById('customer_notes_text').value;document.getElementById('checkout_form').submit()" class="checkout-button button alt wc-forward">
-    <?php _e( 'Proceed to checkout', 'woocommerce' ); ?></a>
+        <?php echo ex_cta('arrow', 'Review &amp; Complete Appointment', '#'); ?>
   </form>
 <?php
   }
@@ -60,3 +59,9 @@
     return $passed;
   }
   add_filter('woocommerce_add_to_cart_validation', 'ex_wcOnlyOneItem', 99, 2);
+
+  // Change Empty Cart Message
+  function ex_wcEmptyCartMsg() {
+    return 'No inspection or date has been selected.';
+  }
+  add_filter('wc_empty_cart_message', 'ex_wcEmptyCartMsg');

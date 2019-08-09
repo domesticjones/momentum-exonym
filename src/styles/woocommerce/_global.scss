@@ -25,11 +25,16 @@
   }
 }
 
-.schedule-cart-warning {
+.schedule-cart-warning,
+.woocommerce-notices-wrapper {
   @include grid(center, center);
   margin: 0 auto 2rem auto;
   padding: 2rem;
   background-color: $grey;
+
+  .woocommerce-message {
+    @include grid(center, center);
+  }
 
   span {
     @include fontItalic();
@@ -43,12 +48,22 @@
     }
   }
 
-  .cta-wrap {
+  .restore-item {
+    @extend .cta-button;
+    @extend .cta-icon-arrow;
+  }
+
+  .cta-wrap,
+  .restore-item {
     margin: 0 0 0 1rem;
   }
 
   .cta-button {
     font-size: 0.75em;
+  }
+
+  &:empty {
+    display: none;
   }
 }
 

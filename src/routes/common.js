@@ -77,5 +77,28 @@ export default {
       $this.toggleClass('is-active');
       $('#alg_wc_pif_local_1').val(inspections.join(', '));
     });
+
+    // SCHEDULE: Submit Order Details as Order Notes
+    $(document).on('click', '#checkout_form a', () => {
+      const sup = $('#details-supervisor-name').val();
+      const supTel = $('#details-supervisor-phone').val();
+      const sqft = $('#details-sqft').val();
+      const address = $('#details-address').val();
+      const lot = $('#details-lot').val();
+      const subdivision = $('#details-subdivision').val();
+      const city = $('#details-city').val();
+      const state = $('#details-state').val();
+      const zip = $('#details-zip').val();
+      const services = $('.alg-pif-dd').text();
+      const details = `${services} — ${sup} (${supTel}) — ${sqft}sqft — ${address} - ${lot} ${subdivision}, ${city}, ${state} ${zip}`;
+      $('#customer_notes_text').val(details);
+      const custNotes = $('#customer_notes_text').val();
+      $('#customer_notes').val(custNotes);
+      if(sup.length && supTel.length && sqft.length && city.length && state.length && zip.length) {
+        $('#checkout_form').submit();
+      } else {
+        alert('Supervisor name, phone, total square feet, and city/state/zip are required.');
+      }
+    });
   },
 };
