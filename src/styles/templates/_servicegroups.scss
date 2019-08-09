@@ -100,6 +100,15 @@
   display: none;
   padding: 1rem;
   font-size: 0.85rem;
+
+  .cta-wrap {
+    margin-top: 0;
+    font-size: 0.75em;
+
+    .cta-button {
+      margin-right: auto;
+    }
+  }
 }
 
 .service-image-photo {

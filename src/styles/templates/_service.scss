@@ -1,3 +1,43 @@
+.module-services {
+  padding: 2rem;
+}
+
+.services-groups-wrap{
+  @include listStripped();
+
+  li {
+    @include grid(flex-start, stretch);
+    min-height: 50vh;
+
+    &:nth-child(odd) {
+      @include grid(flex-start, stretch, row-reverse);
+    }
+  }
+
+  .image,
+  .content {
+    padding: 2rem;
+    width: 50%;
+  }
+
+  .image {
+    background-size: center;
+    background-position: center;
+
+    img {
+      display: none;
+    }
+  }
+
+  .content {
+    @include grid(center, flex-start, column);
+  }
+}
+
+.services-terms-wrap {
+  @include listStripped();
+}
+
 .service-single-moreinfo {
   padding-bottom: 2rem;
 
@@ -53,6 +93,34 @@
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .module-services {
+    padding: 0;
+  }
+
+  .services-groups-wrap {
+    li,
+    li:nth-child(odd) {
+      @include grid(center, center, column);
+      min-height: 1px;
+    }
+
+    .image,
+    .content {
+      width: 100%;
+    }
+
+    .image {
+      background-image: none !important;
+      padding-bottom: 0;
+
+      img {
+        display: block;
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .service-more {
     width: 100%;

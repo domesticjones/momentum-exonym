@@ -31,7 +31,7 @@
             echo '<li class="service-list-title"><h2>Necessary Inspections for ' . $termArray['name'] . '</h2></li>';
             while(have_posts()) {
               the_post();
-              echo '<li class="service-single"><h3 class="service-single-title">' . get_the_title() . '</h3><div class="service-single-content">' . get_field('description') . ex_cta('arrow', 'More Information', get_permalink())'</div></li>';
+              echo '<li class="service-single"><h3 class="service-single-title">' . get_the_title() . '</h3><div class="service-single-content">' . get_field('description') . ex_cta('arrow', 'More Info on ' . get_the_title(), get_permalink()) . '</div></li>';
             }
           echo '<ul>';
         }

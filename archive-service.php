@@ -1,40 +1,28 @@
 <?php
+  $servicesPage = 305;
   get_header();
-  if(have_posts()) {
-    echo '<h1>Services Archive</h1>';
-    echo '<ul>';
-    while(have_posts()) {
-      the_post();
-      $id = $post->ID;
-      $icon = get_field('icon');
-      $terms = get_the_terms($id, 'service_groups');
-      $termsList = [];
-      if(!is_wp_error($terms)) {
-        foreach($terms as $term) {
-          array_push($termsList, $term->name);
-        }
+  echo ex_content($servicesPage);
+  echo ex_wrap('start', 'services');
+  $termsArgs = array(
+    'taxonomy'    => 'service_groups',
+    'hide_empty'  =>  false,
+  );
+  $termsList = get_terms($termsArgs);
+  if(!is_wp_error($termsList)) {
+    echo '<ul class="services-groups-wrap">';
+      foreach($termsList as $term) {
+        $termAcf = 'term_' . $term->term_id;
+        $photo = get_field('images', $termAcf)['photo'];
+        $link = get_term_link($term->term_id);
+        $name = $term->name;
+        $desc = $term->description;
+        echo '<li>';
+          echo '<div class="image" style="background-image: url(' . wp_get_attachment_image_url($photo['ID'], 'large') . ')">' . wp_get_attachment_image($photo['ID'], 'large') . '</div>';
+          echo '<div class="content"><h2>' . $name . '</h2><p>' . $desc . '</p>' . ex_cta('arrow', 'Learn More', $link) . '</div>';
+        echo '</li>';
       }
-      echo '<h2>' . get_the_title($id) . '</h2>';
-      echo '<img src="' . $icon['sizes']['small'] . '" height="30" width="30" class="aligncenter" />';
-      echo get_the_post_thumbnail($id, 'large', array('class' => 'aligncenter'));
-      echo 'Part of the <strong>' . implode(', ', $termsList) . '</strong> Service Group(s)';
-      the_field('description');
-      if(have_rows('links')) {
-        echo '<h3>Links</h3>';
-        echo '<ul>';
-        while(have_rows('links')) {
-          the_row();
-          $link = get_sub_field('link');
-          echo '<li>';
-            echo '<a href="' . $link['url'] . '" target="' . $link['target'] . '">' . $link['title'] . '</a>';
-          echo '</li>';
-        }
-        echo '</ul>';
-      }
-    }
     echo '</ul>';
-  } else {
-    get_template_part('404');
   }
+  echo ex_wrap('end');
   get_footer();
 ?>
