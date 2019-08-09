@@ -4,6 +4,7 @@
   $dateSelectText = get_field('date_select_disclaimer', $shopId);
   $chooseHeading = get_field('choose_tests_heading', $shopId);
   $serviceCat = get_field('service_category');
+  $previous = get_field('step_two', $shopId)['previous_button'];
   echo '<aside class="inspection-sidebar">';
     if($serviceCat == null) {
       echo '<h3>' . $chooseHeading . '</h3>';
@@ -25,5 +26,6 @@
       wp_reset_postdata();
     }
     echo str_replace('%%product%%', $productTitle, $dateSelectText);
+    echo '<a href="' . get_permalink(wc_get_page_id('shop')) . '" class="inspection-cancel">' . $previous . '</a>';
   echo '</aside>';
 ?>

@@ -1,17 +1,13 @@
-.woocommerce-loop-product__link {
-
-}
-
 .products {
   @include listStripped();
-  @include grid(center, flex-start);
+  @include grid(center, flex-start, row, wrap);
 
   .add_to_cart_button {
     display: none;
   }
 
   li.product {
-    max-width: 20%;
+    min-width: 20%;
   }
 
   h2 {

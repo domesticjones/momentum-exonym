@@ -51,6 +51,12 @@
 .wc-bookings-date-picker {
   padding: 0;
 
+  .ui-widget-content {
+    box-shadow: none;
+    border: 1px solid $grey;
+    border-radius: 4px;
+  }
+
   .ui-datepicker-header {
     background-color: $grey;
     background-image: none;
@@ -127,5 +133,66 @@
     &:hover {
       background-color: transparentize($aqua, 0.75);
     }
+
+    &.is-active {
+      background-color: $purple;
+      border-color: $purple;
+      color: $white;
+    }
+  }
+}
+
+a.inspection-cancel {
+  @include grid(flex-start, center);
+  position: relative;
+  color: $blue;
+  opacity: 0.5;
+  line-height: 1;
+  @include fontItalic();
+  @include transition();
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    margin-right: 0.5em;
+    @include icon(arrowLeftShort-blue);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+#alg-product-input-fields-table {
+  display: none;
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media(max-width: 1024px) {
+  .single-product .product-type-booking {
+    @include grid(center, center, column);
+    margin-top: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .inspection-calendar,
+  .inspection-sidebar {
+    padding: 2rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 660px) {
+  .inspection-calendar,
+  .inspection-sidebar {
+    padding: 2rem 0;
+    width: 100%;
   }
 }

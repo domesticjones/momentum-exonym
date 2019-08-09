@@ -18,7 +18,7 @@
   }
   if($cartCount > 0 && !is_checkout() && !is_cart()) {
     echo '<header class="schedule-cart-warning">';
-      echo '<span>You have already started scheduling an inspection.<i>If you proceed with a different inspection, your requested time will be forefeited.</i></span>';
+      echo '<span>You have already started scheduling an inspection.<i>If you proceed with a different inspection, this requested date will be discarded.</i></span>';
       echo ex_cta('arrow', 'Complete Inspection', get_permalink(wc_get_page_id('cart')));
     echo '</header>';
   }

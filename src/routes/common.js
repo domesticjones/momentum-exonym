@@ -61,5 +61,21 @@ export default {
         $('#header').removeClass('is-scrolled');
       }
     });
+
+    // SCHEDULE: Services Select
+    let inspections = [];
+    $(document).on('click', '#inspection-choose li', (e) => {
+      const $this = $(e.currentTarget);
+      const val = $this.text();
+      const check = inspections.includes(val);
+      if(check) {
+        const inspectionFound = inspections.indexOf(val);
+        if(~inspectionFound) inspections.splice(inspectionFound, 1);
+      } else {
+        inspections.push(val);
+      }
+      $this.toggleClass('is-active');
+      $('#alg_wc_pif_local_1').val(inspections.join(', '));
+    });
   },
 };

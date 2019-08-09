@@ -54,17 +54,9 @@
   }
   add_filter('woocommerce_checkout_fields', 'webendev_woocommerce_checkout_fields');
 
-
-
-
-
-
-  add_filter( 'woocommerce_add_to_cart_validation', 'bbloomer_only_one_in_cart', 99, 2 );
-
-function bbloomer_only_one_in_cart( $passed, $added_product_id ) {
-
-// empty cart first: new item will replace previous
-wc_empty_cart();
-
-return $passed;
-}
+  // Allow only one item in cart at a time
+  function ex_wcOnlyOneItem( $passed, $added_product_id ) {
+    wc_empty_cart();
+    return $passed;
+  }
+  add_filter('woocommerce_add_to_cart_validation', 'ex_wcOnlyOneItem', 99, 2);
