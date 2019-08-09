@@ -17,9 +17,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-do_action( 'woocommerce_before_cart' );
+//do_action( 'woocommerce_before_cart' );
 
 wc_get_template_part('header', 'schedule');
+
 ?>
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
@@ -163,8 +164,9 @@ wc_get_template_part('header', 'schedule');
 		 * @hooked woocommerce_cross_sell_display
 		 * @hooked woocommerce_cart_totals - 10
 		 */
-		do_action( 'woocommerce_cart_collaterals' );
 	?>
 </div>
 
-<?php do_action( 'woocommerce_after_cart' ); ?>
+<?php
+	do_action( 'woocommerce_cart_collaterals' );
+	do_action( 'woocommerce_after_cart' ); ?>

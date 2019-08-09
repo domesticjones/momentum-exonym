@@ -48,6 +48,11 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	do_action( 'woocommerce_shop_loop_item_title' );
 
+	$serviceCat = get_field('service_category');
+	if(empty($serviceCat)) {
+		echo '<span class="product-shop-disclaimer">Choose individual tests</span>';
+	}
+
 	/**
 	 * Hook: woocommerce_after_shop_loop_item_title.
 	 *

@@ -1,6 +1,6 @@
 			</main>
 			<?php
-				if(have_rows('affiliates', 'options')) {
+				if(have_rows('affiliates', 'options') && !is_woocommerce() && !is_cart() && !is_checkout()) {
 					echo '<nav id="affiliates"><ul>';
 						while(have_rows('affiliates', 'options')) {
 							the_row();

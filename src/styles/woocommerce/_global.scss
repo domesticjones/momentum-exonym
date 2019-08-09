@@ -1,0 +1,53 @@
+.post-type-archive-product main {
+  min-height: 80vh;
+}
+
+.schedule-header {
+  max-width: 1024px;
+  margin: 0 auto 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+
+  h1 {
+    margin-bottom: 0.5em;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 45%;
+    bottom: 0;
+    width: 10%;
+    height: 3px;
+    background-color: $yellow;
+  }
+}
+
+.schedule-cart-warning {
+  @include grid(center, center)
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: $grey;
+
+  span {
+    @include fontItalic();
+    text-align: right;
+
+    i {
+      display: block;
+      font-size: 0.85em;
+      color: $blue;
+      padding-top: 0.5em;
+    }
+  }
+
+  .cta-wrap {
+    margin: 0 0 0 1rem;
+  }
+
+  .cta-button {
+    font-size: 0.75em;
+  }
+}

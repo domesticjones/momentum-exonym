@@ -30,6 +30,7 @@
     "wpackagist-plugin/wp-sweep": "*",
     "wpackagist-plugin/admin-menu-editor": "*",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "wpackagist-plugin/woocommerce": "3.6.5"
+    "wpackagist-plugin/woocommerce": "3.6.5",
+    "wpackagist-plugin/product-input-fields-for-woocommerce": "1.2.4"
   }
 }

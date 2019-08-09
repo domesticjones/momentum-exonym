@@ -114,7 +114,6 @@ add_action( 'init', 'ctax_serviceCats', 0 );
 
 // CPT: Resource
 function cpt_resource() {
-
 	$labels = array(
 		'name'                  => _x( 'Resources', 'Post Type General Name', 'exonym' ),
 		'singular_name'         => _x( 'Resource', 'Post Type Singular Name', 'exonym' ),

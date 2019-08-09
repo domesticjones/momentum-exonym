@@ -1,5 +1,5 @@
 <?php
-  function ex_cta($type = null, $text = null) {
+  function ex_cta($type = null, $text = null, $url = null) {
     $output = '';
     if(!$type) {
       $type = get_sub_field('cta_type');
@@ -20,6 +20,8 @@
       $targetPrint = get_sub_field('cta_link')['target'];
       $type = 'arrow';
     }
+    if($url != null) { $linkPrint = $url; }
+    if($text != null) { $textPrint = $text; }
     if($type != 'none') {
       $output = '<div class="cta-wrap"><a href="' . $linkPrint . '" class="cta-button cta-icon-' . $type . '"><span>' . $textPrint . '</span></a></div>';
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29d5505580b4acaad6b4edb0be402335",
+    "content-hash": "05957a2fc9b95755fac187cc587daf0d",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -385,6 +385,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/favicon-by-realfavicongenerator/"
+        },
+        {
+            "name": "wpackagist-plugin/product-input-fields-for-woocommerce",
+            "version": "1.2.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/product-input-fields-for-woocommerce/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/product-input-fields-for-woocommerce.zip?timestamp=1554357685",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/product-input-fields-for-woocommerce/"
         },
         {
             "name": "wpackagist-plugin/woocommerce",

@@ -5,6 +5,9 @@
   }
   add_action('after_setup_theme', 'ex_woocommerce_support');
 
+  // Kill the Stylesheets
+  add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+
   // Remove Unnecessary Woocomerce Items
   function ex_wcStrip_metaboxes() {
     remove_meta_box('woocommerce-product-images', 'product', 'side');
@@ -14,6 +17,9 @@
     remove_meta_box('tagsdiv-product_tag', 'product', 'side');
   }
   add_action('add_meta_boxes', 'ex_wcStrip_metaboxes', 40);
+
+  // Remove Extraneous Product Details
+  remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title');
 
   // Add Order Notes onto Cart Page
   function ex_wcOrderNotesField() {
@@ -47,3 +53,18 @@
     return $fields;
   }
   add_filter('woocommerce_checkout_fields', 'webendev_woocommerce_checkout_fields');
+
+
+
+
+
+
+  add_filter( 'woocommerce_add_to_cart_validation', 'bbloomer_only_one_in_cart', 99, 2 );
+
+function bbloomer_only_one_in_cart( $passed, $added_product_id ) {
+
+// empty cart first: new item will replace previous
+wc_empty_cart();
+
+return $passed;
+}

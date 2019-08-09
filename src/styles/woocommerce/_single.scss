@@ -1,0 +1,131 @@
+.single-product {
+  .product-type-booking {
+    @include grid(center, stretch);
+    padding: 0 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 4rem auto;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background-color: $blue;
+    }
+  }
+
+  .ui-widget {
+    font-family: $font-default;
+  }
+
+  .wc-bookings-booking-cost {
+    display: none !important;
+  }
+}
+
+.single_add_to_cart_button  {
+  @extend .cta-button;
+  @extend .cta-icon-arrow;
+  font-size: 1.25em;
+  height: auto;
+  width: auto;
+  border: none;
+  margin: 0 auto;
+}
+
+.inspection-calendar,
+.inspection-sidebar {
+  padding: 0 4rem;
+  width: 50%;
+}
+
+.wc-bookings-booking-form {
+  padding: 0;
+  border: none;
+}
+
+.wc-bookings-date-picker {
+  padding: 0;
+
+  .ui-datepicker-header {
+    background-color: $grey;
+    background-image: none;
+    border: none;
+    color: $blue;
+
+    .ui-datepicker-title {
+      @include fontBold();
+    }
+  }
+
+  .ui-datepicker {
+    .ui-datepicker-next,
+    .ui-datepicker-prev {
+      background-color: transparent;
+      @include transition();
+
+      &:hover {
+        background-color: transparent;
+        transform: scale(1.33);
+      }
+    }
+
+    td {
+      &.partial_booked,
+      &.bookable, {
+        a {
+          background-color: transparentize($aqua, 0.33) !important;
+          @include transition();
+
+          &:hover {
+            color: $white;
+            background-color: $aqua !important;
+          }
+        }
+      }
+
+
+      &.bookable-range .ui-state-default {
+        background-color: $purple !important;
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .ui-icon-circle-triangle-e {
+    @include icon(arrowRightShort-blue);
+  }
+  .ui-icon-circle-triangle-w {
+    @include icon(arrowLeftShort-blue);
+  }
+}
+
+#inspection-choose {
+  @include listStripped();
+  @include grid(flex-start, center, row, wrap);
+  margin-bottom: 2rem;
+
+  li {
+    font-size: 0.85em;
+    margin: 0 0.5em 0.5em 0;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    border: 1px solid $blue;
+    color: $blue;
+    cursor: hand;
+    cursor: pointer;
+    @include fontBold();
+    @include transition();
+
+    &:hover {
+      background-color: transparentize($aqua, 0.75);
+    }
+  }
+}
