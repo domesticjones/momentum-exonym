@@ -37,10 +37,11 @@
   }
   add_filter('body_class', 'ex_contentBodyClass', 1000);
 
-  function ex_content() {
+  function ex_content($id = null) {
+    if($id == null) { $id = $post->ID; }
     echo '<article class="' . implode(" ", get_post_class()) . '">';
-    if(have_rows('modules')) {
-      while(have_rows('modules')) {
+    if(have_rows('modules', $id)) {
+      while(have_rows('modules', $id)) {
         the_row();
         if(get_row_layout() == 'contact_info') {
           get_template_part('modules/contact');
@@ -89,7 +90,7 @@
     return $output;
   }
 
-  function ex_moduleBg($id, $style = null) {
+  function ex_moduleBg($id, $style = null, $classes = null) {
     $styleOutput = ' style="background-image: url(' . wp_get_attachment_image_url($id, 'jumbo') . ');' . $style . '"';
     $output = '<div class="module-bg"' . $styleOutput . '>' . wp_get_attachment_image($id, 'jumbo') . '</div>';
     return $output;

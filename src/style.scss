@@ -35,7 +35,13 @@
 @import "styles/modules/contact";
 
 /**
-  Modules
+  Templates
+  ---------------------------------------------------------------------- */
+@import "styles/templates/service";
+@import "styles/templates/servicegroups";
+
+/**
+  Woocommerce
   ---------------------------------------------------------------------- */
 @import "styles/woocommerce/global";
 @import "styles/woocommerce/shop";

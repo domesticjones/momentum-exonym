@@ -100,5 +100,19 @@ export default {
         alert('Supervisor name, phone, total square feet, and city/state/zip are required.');
       }
     });
+
+    // MODULE: Services Accordion
+    $('.service-single-title').click(e => {
+      const $this = $(e.currentTarget);
+      if($this.hasClass('is-active')) {
+        $this.removeClass('is-active');
+        $this.next().slideUp();
+      } else {
+        $('.service-single-title').removeClass('is-active');
+        $('.service-single-content').slideUp();
+        $this.addClass('is-active');
+        $this.next().slideDown();
+      }
+    });
   },
 };

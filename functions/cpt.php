@@ -44,7 +44,7 @@ function cpt_service() {
 		'filter_items_list'     => __( 'Filter Services list', 'exonym' ),
 	);
 	$rewrite = array(
-		'slug'                  => 'services',
+		'slug'                  => 'service',
 		'with_front'            => true,
 		'pages'                 => true,
 		'feeds'                 => true,
@@ -63,7 +63,7 @@ function cpt_service() {
 		'show_in_admin_bar'     => true,
 		'show_in_nav_menus'     => true,
 		'can_export'            => true,
-		'has_archive'           => true,
+		'has_archive'           => 'services',
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'rewrite'               => $rewrite,
@@ -106,7 +106,7 @@ function ctax_serviceCats() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
-		'rewrite'                    => false,
+		'rewrite'                    => array('slug' => 'service-group', 'with_front' => false),
 	);
 	register_taxonomy( 'service_groups', array( 'service', 'resource' ), $args );
 }

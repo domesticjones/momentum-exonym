@@ -1,0 +1,61 @@
+.service-single-moreinfo {
+  padding-bottom: 2rem;
+
+  .title {
+    width: 100%;
+    font-size: 2em;
+    text-align: center;
+    padding-top: 1em;
+  }
+
+  .module-inner {
+    @include grid(center, center, row, wrap);
+  }
+}
+
+.service-more {
+  @include listStripped();
+  @include grid(center, center, column);
+  text-align: center;
+  width: calc(50% - 4rem);
+  margin: 2rem;
+  padding: 2rem;
+  border: 1px solid $blue;
+  border-radius: 4px;
+
+  li {
+    margin-bottom: 1em;
+
+    &.service-more-heading {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    font-size: 1em;
+    display: block;
+    color: $blue;
+    @include fontBold();
+    @include transition();
+
+    &:hover {
+      color: $purple;
+    }
+  }
+
+  p {
+    padding: 0;
+    font-size: 0.75em;
+    @include fontItalic();
+  }
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .service-more {
+    width: 100%;
+    margin: 2em 0;
+  }
+}

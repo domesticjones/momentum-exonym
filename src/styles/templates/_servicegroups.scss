@@ -1,0 +1,157 @@
+.module-service-top,
+.module-service-bottom {
+  padding: 2rem;
+
+  .module-inner {
+    @include grid();
+  }
+
+  .left,
+  .right {
+    padding: 2rem;
+  }
+}
+
+.module-service-top {
+  .left {
+    width: 70%;
+  }
+
+  .right {
+    width: 30%;
+  }
+}
+
+.service-steps {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  & > li {
+    @include grid();
+    margin-bottom: 4em;
+  }
+}
+
+.service-thumb {
+  width: 6em;
+  margin-right: 2em;
+}
+
+.service-text {
+  width: 100%;
+}
+
+.module-service-bottom {
+  background-color: $grey;
+
+  .left {
+    width: 30%;
+  }
+
+  .right {
+    width: 70%;
+  }
+}
+
+.service-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  .service-single {
+    margin: 0;
+    padding: 0;
+  }
+
+  .service-list-title {
+    margin-bottom: 2em;
+  }
+}
+
+.service-single-title {
+  @include grid(space-between, center);
+  background-color: $grey;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin-bottom: 3px;
+  cursor: hand;
+  cursor: pointer;
+  @include transition();
+
+  &::after {
+    content: '';
+    display: block;
+    width: 1em;
+    height: 1em;
+    @include icon(plus-blue);
+  }
+
+  &:hover {
+    background-color: transparentize($grey, 0.5);
+  }
+
+  &.is-active::after {
+    @include icon(minus-blue);
+  }
+}
+
+.service-single-content {
+  display: none;
+  padding: 1rem;
+  font-size: 0.85rem;
+}
+
+.service-image-photo {
+  margin-bottom: 2rem;
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media(max-width: 1200px) {
+  .module-service-bottom {
+    .left { width: 40%; }
+    .right { width: 60%; }
+  }
+
+  .module-service-top {
+    .left { width: 60%; }
+    .right { width: 40%; }
+  }
+}
+
+@media(max-width: 1024px) {
+  .module-service-top,
+  .module-service-bottom {
+    padding: 0;
+
+    .left,
+    .right { width: 50%; }
+  }
+}
+
+@media(max-width: 768px) {
+  .module-service-top,
+  .module-service-bottom {
+
+    .module-inner {
+      @include grid(center, center, column);
+    }
+
+    .left,
+    .right { width: 100%; }
+  }
+}
+
+@media(max-width: 768px) {
+  .service-steps > li {
+    @include grid(center, center, column);
+    margin-bottom: 2rem;
+  }
+
+  .service-thumb {
+    width: auto;
+    margin: 0 0 2rem 0;
+  }
+}
