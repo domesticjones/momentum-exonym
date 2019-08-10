@@ -1,0 +1,123 @@
+.login-header {
+  position: relative;
+  text-align: center;
+  padding: 0.75em 0;
+  margin-bottom: 1em;
+
+  span {
+    display: block;
+    color: $blue;
+    text-transform: uppercase;
+    font-size: 0.5em;
+    letter-spacing: 0.5ex;
+    margin-bottom: 1em;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: calc(50% - 3rem);
+    bottom: 0;
+    width: 6rem;
+    height: 3px;
+    background-color: $yellow;
+  }
+}
+
+.woocommerce-form-login {
+  .woocommerce-form-row {
+    input {
+      font-size: 2em;
+    }
+
+    label {
+      font-size: 1.5em;
+      color: $purple;
+    }
+  }
+}
+
+
+.login-form-bottom {
+  @include grid(space-between);
+
+  .cta-wrap {
+    margin-top: 0;
+  }
+}
+
+.login-form-meta {
+  a.inspection-cancel {
+    display: block;
+    color: $blue;
+    margin:0 0 1em 0.25em;
+    opacity: 1;
+  }
+}
+
+.woocommerce-form-login__submit {
+  @extend .cta-button;
+  @extend .cta-icon-arrow;
+  height: auto;
+  width: auto;
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+#rememberme {
+  display: none;
+
+  & + label {
+    @include grid(flex-start, center);
+    position: relative;
+    color: $blue;
+    padding: 0;
+    margin: 0 0 1em 0;
+    line-height: 1;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 1em;
+      height: 1em;
+      border: 1px solid $blue;
+      margin-right: 0.5em;
+    }
+  }
+
+  &:checked + label {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0.5em;
+      height: 0.5em;
+      left: 0.25em;
+      top: 0.25em;
+      background-color: $blue;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .woocommerce-form-login .woocommerce-form-row label {
+    font-size: 1.25em;
+  }
+
+  .woocommerce-form-login .woocommerce-form-row input {
+    font-size: 1.5em;
+  }
+
+  .login-form-bottom {
+    @include grid(center, center, column-reverse);
+  }
+
+  .login-form-meta {
+    @include grid(center, center, column);
+  }
+
+  .woocommerce-form-login__submit {
+    font-size: 1.25em;
+  }
+}

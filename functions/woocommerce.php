@@ -5,6 +5,22 @@
   }
   add_action('after_setup_theme', 'ex_woocommerce_support');
 
+  // Redirect login requests to Account page
+  function ex_redirect_wc_public(){
+    global $pagenow;
+    if( 'wp-login.php' == $pagenow ) {
+      if ( isset( $_POST['wp-submit'] ) ||   // in case of LOGIN
+        ( isset($_GET['action']) && $_GET['action']=='logout') ||   // in case of LOGOUT
+        ( isset($_GET['checkemail']) && $_GET['checkemail']=='confirm') ) return;  // in case of LOST PASSWORD
+        //( isset($_GET['checkemail']) && $_GET['checkemail']=='registered') ) return;    // in case of REGISTER
+      else {
+        wp_redirect(get_permalink(get_option('woocommerce_myaccount_page_id')), 301);
+        exit();
+      }
+    }
+  }
+  add_action('init','ex_redirect_wc_public');
+
   // Kill the Stylesheets
   add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
@@ -65,3 +81,22 @@
     return 'No inspection or date has been selected.';
   }
   add_filter('wc_empty_cart_message', 'ex_wcEmptyCartMsg');
+
+
+
+  // Detach Registration page and make it on its own section
+
+add_shortcode( 'ex_wcRegistrationForm', 'bbloomer_separate_registration_form' );
+
+function bbloomer_separate_registration_form() {
+   if ( is_admin() ) return;
+   if ( is_user_logged_in() ) return;
+   ob_start();
+
+   // NOTE: THE FOLLOWING <FORM></FORM> IS COPIED FROM woocommerce\templates\myaccount\form-login.php
+   // IF WOOCOMMERCE RELEASES AN UPDATE TO THAT TEMPLATE, YOU MUST CHANGE THIS ACCORDINGLY
+
+   wc_get_template_part('myaccount/form', 'register');
+
+   return ob_get_clean();
+}

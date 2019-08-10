@@ -36,6 +36,10 @@
     @include grid(center, center);
   }
 
+  .woocommerce-error {
+    margin-bottom: 0;
+  }
+
   span {
     @include fontItalic();
     text-align: right;
