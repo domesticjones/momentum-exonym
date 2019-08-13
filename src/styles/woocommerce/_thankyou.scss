@@ -1,0 +1,48 @@
+.order-received-left,
+.order-received-right {
+  width: 50%;
+  float: left;
+  text-align: center;
+
+  p {
+    padding: 0;
+    margin-bottom: 2rem;
+
+    strong {
+      font-size: 0.85em;
+      color: $blue;
+      display: block;
+    }
+  }
+}
+
+.order-received-left {
+  .supervisor,
+  .services,
+  .sqft {
+    display: none;
+  }
+}
+
+.order-received-right {
+  .address {
+    display: none;
+  }
+}
+
+.order-received-accountlink.inspection-cancel {
+  @include grid(center, center);
+  padding: 2rem;
+  opacity: 1;
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .order-received-left,
+  .order-received-right {
+    width: 100%;
+    float: none;
+  }
+}

@@ -8,6 +8,7 @@ export default {
 
   	// HEADER: Responsive Nav Toggle
   	$('#header-nav-toggle').click(e => {
+      e.preventDefault();
   		const $this = $(e.currentTarget);
   		$this.toggleClass('is-active');
   		$('#nav-responsive').toggleClass('is-active');
@@ -90,7 +91,15 @@ export default {
       const state = $('#details-state').val();
       const zip = $('#details-zip').val();
       const services = $('.alg-pif-dd').text();
-      const details = `${services} — ${sup} (${supTel}) — ${sqft}sqft — ${address} - ${lot} ${subdivision}, ${city}, ${state} ${zip}`;
+      let servicesPrint = '';
+      if(services.length > 0) {
+        servicesPrint = `[services]${services}[/services]`;
+      }
+      let areaPrint = '';
+      if(lot.length >0 || subdivision.length > 0) {
+        areaPrint = `[area]${lot} ${subdivision}[/area]`;
+      }
+      const details = `${servicesPrint}[sup]${sup} (${supTel})[/sup][sqft]${sqft} sqft[/sqft][address]${address}[/address]${areaPrint}[locale]${city}, ${state} ${zip}[/locale]`;
       $('#customer_notes_text').val(details);
       const custNotes = $('#customer_notes_text').val();
       $('#customer_notes').val(custNotes);

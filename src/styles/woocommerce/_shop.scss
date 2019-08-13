@@ -61,6 +61,10 @@
       background-color: $blue;
     }
   }
+
+  & + .woocommerce-MyAccount-navigation {
+    display: none;
+  }
 }
 
 .product-shop-disclaimer {
@@ -69,4 +73,12 @@
   margin-left: 0.15em;
   font-size: 0.75em;
   @include fontItalic();
+}
+
+@media (max-width: 960px) {
+
+
+  .products + .woocommerce-MyAccount-navigation {
+    display: block;
+  }
 }

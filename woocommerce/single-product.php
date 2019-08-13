@@ -63,6 +63,8 @@ wc_get_template_part('header', 'schedule');
 		 * @hooked woocommerce_get_sidebar - 10
 		 */
 		//do_action( 'woocommerce_sidebar' );
+
+		do_action( 'woocommerce_account_navigation' );
 	?>
 
 <?php get_footer( 'shop' );

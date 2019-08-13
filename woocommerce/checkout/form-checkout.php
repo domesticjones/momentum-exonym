@@ -64,4 +64,4 @@ echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 
 </form>
 
-<?php echo '</div>' . ex_wrap('end'); do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
+<?php echo '</div>' . ex_wrap('end'); do_action( 'woocommerce_after_checkout_form', $checkout ); do_action( 'woocommerce_account_navigation' ); ?>

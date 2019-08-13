@@ -18,10 +18,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+wc_get_template_part('header', 'schedule');
 echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 ?>
 
-<div class="woocommerce-order">
 
 	<?php if ( $order ) : ?>
 
@@ -35,8 +35,28 @@ echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 			</p>
 		<?php endif; ?>
 
-		<?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
-		<?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
+		<?php //do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
+		<?php //do_action( 'woocommerce_thankyou', $order->get_id() );
+
+
+		if(is_callable('WC_Booking_Data_Store::get_booking_ids_from_order_id')) {
+			$booking_data = new WC_Booking_Data_Store();
+			$booking_ids = $booking_data->get_booking_ids_from_order_id( $order->get_id() );
+		}
+		$booking = new WC_Booking($booking_ids[0]);
+		$title = '<h3>' . $booking->get_product()->get_title() . '</h3>';
+		$date = '<p><strong>Inspection Request Date: </strong>' . $booking->get_start_date(null, null, wc_should_convert_timezone($booking)) . '</p>';
+		echo '<section class="order-received-left">';
+			echo $title . $date;
+			echo ex_wcParseNotes($order->get_customer_note());
+		echo '</section>';
+		echo '<section class="order-received-right">';
+			echo ex_wcParseNotes($order->get_customer_note());
+		echo '</section>';
+		echo ex_cta('schedule', 'Schedule Another');
+    echo '<a href="' . get_permalink(wc_get_page_id('myaccount')) . '" class="order-received-accountlink inspection-cancel">Go to My Account</a>';
+
+		?>
 
 	<?php else : ?>
 
@@ -44,6 +64,4 @@ echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 
 	<?php endif; ?>
 
-</div>
-
-<?php echo '</div>' . ex_wrap('end');
+<?php echo '</div>' . ex_wrap('end'); do_action( 'woocommerce_account_navigation' );

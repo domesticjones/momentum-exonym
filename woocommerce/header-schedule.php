@@ -2,7 +2,6 @@
   $shopId = wc_get_page_id('shop');
   $heading = get_field('heading', $shopId);
   $cartCount = WC()->cart->get_cart_contents_count();
-  // Make just one step that changes based on wc page type
   $headingSub = '';
   $step1 = get_field('step_one', $shopId);
   $step2 = get_field('step_two', $shopId);
@@ -14,7 +13,11 @@
   } elseif(is_cart()) {
     $headingSub = $step3['title'];
   } elseif(is_checkout()) {
-    $headingSub = 'Please review your inspection details before submitting.';
+    if(is_wc_endpoint_url( 'order-received' )) {
+      $headingSub = 'Your Schedule Request has been placed!';
+    } else {
+      $headingSub = 'Please review your inspection details before submitting.';
+    }
   }
   if($cartCount > 0 && !is_checkout() && !is_cart()) {
     echo '<header class="schedule-cart-warning">';

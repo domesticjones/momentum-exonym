@@ -28,11 +28,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</li>
 		<?php endforeach; */ ?>
 
-    <li><a href="<?php echo wc_get_account_endpoint_url('dashboard'); ?>">Dashboard</a></li>
-    <li><a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>">Schedule Inspection</a></li>
-    <li><a href="<?php echo wc_get_account_endpoint_url('orders'); ?>">My Inspections</a></li>
-    <li><a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>">Account Details</a></li>
-    <li><a href="<?php echo wc_get_account_endpoint_url('logout'); ?>">Logout</a></li>
+    <li class="account-nav-dashboard<?php if(is_account_page() && !is_wc_endpoint_url('orders') && !is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('dashboard'); ?>"><span>Dashboard</span><i>Account</i></a></li>
+    <li class="account-nav-schedule<?php if(is_shop() || is_cart() || is_checkout() || is_product()) { echo ' is-active'; } ?>"><a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>"><span>Schedule Inspection</span><i>Schedule</i></a></li>
+    <li class="account-nav-orders<?php if(is_wc_endpoint_url('orders')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('orders'); ?>"><span>My Inspections</span><i>Inspections</i></a></li>
+    <li class="account-nav-profile<?php if(is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>"><span>Account Details</span><i>Profile</i></a></li>
+    <li class="account-nav-logout"><a href="<?php echo wc_get_account_endpoint_url('logout'); ?>"><span>Logout</span><i>Logout</i></a></li>
 	</ul>
 </nav>
 

@@ -192,3 +192,12 @@
     padding: 1em 0;
   }
 }
+
+@media (max-width: 660px) {
+  #affiliates {
+    padding: 4vw;
+    img {
+      height: 3rem;
+    }
+  }
+}

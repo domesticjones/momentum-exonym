@@ -33,6 +33,10 @@
       display: none;
     }
   }
+
+  & + .woocommerce-MyAccount-navigation {
+    display: none;
+  }
 }
 
 .inspection-details-sidebar,
@@ -72,6 +76,12 @@ dd.variation-BookingDate {
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .module-schedule-details + .woocommerce-MyAccount-navigation {
+    display: block;
+  }
+}
+
 @media (max-width: 768px) {
   .inspection-details-sidebar,
   .schedule-details-info {

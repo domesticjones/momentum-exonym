@@ -5,7 +5,8 @@
   .shop_table tfoot,
   .product-quantity,
   .product-total,
-  .wc_payment_methods {
+  .wc_payment_methods,
+  .woocommerce-MyAccount-navigation {
     display: none;
   }
 
@@ -19,10 +20,22 @@
   }
 
   #order_review {
+    @include grid(center, flex-start, row, wrap);
     text-align: center;
 
     h3 {
       margin: 2rem 0 0.5rem 0;
+      width: 100%;
+    }
+
+    p {
+      padding: 1rem;
+
+      strong {
+        display: block;
+        font-size: 0.75em;
+        color: $blue;
+      }
     }
 
     .shop_table {
@@ -46,4 +59,13 @@
 
 .woocommerce-order-details__title {
   display: none;
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .woocommerce-checkout .woocommerce-MyAccount-navigation {
+    display: block;
+  }
 }

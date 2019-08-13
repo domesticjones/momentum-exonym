@@ -22,15 +22,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<p><?php
-	/* translators: 1: user display name 2: logout url */
-	printf(
-		__( 'Hello %1$s (not %2$s? <a href="%3$s">Logout</a>)', 'woocommerce' ),
-		'<strong>' . esc_html( $current_user->billing_first_name . ' ' . $current_user->billing_last_name ) . '</strong>',
-		'<strong>' . esc_html( $current_user->billing_first_name) . '</strong>',
-		esc_url( wc_logout_url( wc_get_page_permalink( 'myaccount' ) ) )
-	);
-?></p>
+<section class="account-data">
+  <?php
+    /* translators: 1: user display name 2: logout url */
+    printf(
+      __( '<p class="account-hello">Hello %1$s <small>(not %2$s? <a href="%3$s">Logout</a>)</small></p>', 'woocommerce' ),
+      '<strong>' . esc_html( $current_user->billing_first_name . ' ' . $current_user->billing_last_name ) . '</strong>',
+      '<strong>' . esc_html( $current_user->billing_first_name) . '</strong>',
+      esc_url( wc_logout_url( wc_get_page_permalink( 'myaccount' ) ) )
+    );
+  ?>
+  <div class="account-data-left">
+
+    <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="account-schedule-cta">
+      <span>Schedule Inspection</span>
+    </a>
+  </div>
+  <div class="account-data-right">
+    <a href="<?php echo wc_get_account_endpoint_url('orders'); ?>" class="account-schedule-cta">
+      <span>View My Inspections</span>
+    </a>
+  </div>
 
 <?php
 	/**
@@ -38,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 *
 	 * @since 2.6.0
 	 */
-	do_action( 'woocommerce_account_dashboard' );
+	//do_action( 'woocommerce_account_dashboard' );
 
 	/**
 	 * Deprecated woocommerce_before_my_account action.
@@ -54,5 +66,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 */
 	do_action( 'woocommerce_after_my_account' );
 
+  echo '</section>';
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

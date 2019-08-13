@@ -1,0 +1,243 @@
+.module-account {
+  @include grid(center, flex-start, row, wrap);
+  min-height: 80vh;
+
+  .woocommerce-notices-wrapper {
+    width: 100%;
+
+    .woocommerce-message {
+      @include grid(space-around, center, column);
+
+      a {
+        @extend .cta-button;
+        @extend .cta-icon-arrow;
+        display: block;
+        font-size: 1em;
+        margin-top: 1em;
+        color: $blue;
+
+        &::after {
+          transform: translateY(0.15em);
+        }
+      }
+    }
+  }
+}
+
+.woocommerce-MyAccount-navigation {
+  width: 25%;
+  max-width: 560px;
+  margin: 4rem 0;
+  @include navMenu(vertical);
+
+  a {
+    display: block;
+    position: relative;
+    background-color: $grey;
+    margin: 0.25em;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    color: $purple;
+    white-space: nowrap;
+    @include fontBold();
+
+    &:hover {
+      background-color: transparentize($grey, 0.5);
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      border: 1px solid $blue;
+      margin-right: 0.5em;
+      transform: translateY(0.15em);
+    }
+
+    i,
+    span {
+      line-height: 1;
+      margin-top: 0.5em;
+    }
+
+    i {
+      display: none;
+      @include fontItalic(false);
+    }
+  }
+
+  .is-active {
+    a::after {
+      content: '';
+      display: block;
+      position: absolute;
+      background-color: $blue;
+      width: 0.5em;
+      height: 0.5em;
+      top: 1em;
+      left: 1.25em;
+    }
+  }
+}
+
+.account-data {
+  @include grid(center, center, row, wrap);
+  width: 75%;
+  max-width: 768px;
+  padding: 4vw;
+
+  &-left, &-right { padding: 2rem; width: 50%; }
+}
+
+a.account-schedule-cta {
+  @include grid(center, center, column);
+  width: 100%;
+  padding: 2rem;
+  background-color: $blue;
+  color: $white;
+  text-align: center;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  @include transition();
+
+  &::before {
+    content: '';
+    width: 50%;
+    height: 4rem;
+    margin-bottom: 1rem;
+    @include icon(calendar-white);
+  }
+
+  &:hover {
+    background-color: $aqua;
+  }
+}
+
+.account-hello {
+  width: 100%;
+  font-size: 2em;
+  padding: 0;
+  text-align: center;
+  line-height: 1em;
+
+  small {
+    display: block;
+    color: $blue;
+  }
+}
+
+.account-orders {
+  @include listStripped();
+}
+
+/**
+  Responsive Breakpoints
+  ---------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .account-data {
+    width: 100%;
+  }
+
+  .woocommerce-MyAccount-navigation {
+    position: fixed;
+    z-index: 997;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 6rem;
+    margin: 0;
+    background-color: $purple;
+    text-align: center;
+
+    ul {
+      @include grid(center, center);
+      height: 100%;
+
+      li {
+        flex: 1 1 0;
+      }
+    }
+
+    a {
+      padding: 0;
+      margin: 0;
+      height: auto;
+      font-size: 0.75em;
+      text-transform: uppercase;
+      color: $white;
+      background-color: transparent;
+
+      &::before {
+        width: 2em;
+        height: 2em;
+        margin: 0;
+        border: none;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      span {
+        display: none;
+      }
+
+      i {
+        display: block;
+      }
+    }
+
+    .is-active a {
+      opacity: 0.4;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .account-nav {
+      &-dashboard a::before { @include icon(dashboard-white); }
+      &-schedule a::before { @include icon(calendar-white); }
+      &-orders a::before { @include icon(inspect-white); }
+      &-profile a::before { @include icon(user-white); }
+      &-logout a::before { @include icon(logout-white); }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .account-data-left,
+  .account-data-right {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 660px) {
+  .module-account {
+    padding: 4rem 0;
+  }
+
+  .account-data-left,
+  .account-data-right {
+    padding: 0.5rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .woocommerce-MyAccount-navigation {
+    height: 5em;
+
+    a {
+      font-size: 0.5em;
+      letter-spacing: 0.25ex;
+
+      &::before {
+        height: 3em;
+        width: 3em;
+      }
+    }
+  }
+}

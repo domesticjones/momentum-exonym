@@ -169,6 +169,10 @@ a.inspection-cancel {
   display: none;
 }
 
+.type-product + .woocommerce-MyAccount-navigation {
+  display: none;
+}
+
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
@@ -186,6 +190,12 @@ a.inspection-cancel {
   .inspection-sidebar {
     padding: 2rem;
     width: 100%;
+  }
+}
+
+@media (max-width: 960px) {
+  .type-product + .woocommerce-MyAccount-navigation {
+    display: block;
   }
 }
 

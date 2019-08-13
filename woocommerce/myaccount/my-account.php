@@ -18,23 +18,12 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * My Account navigation.
+ * My Account content.
  *
  * @since 2.6.0
  */
-; ?>
-
-<div class="woocommerce-MyAccount-content">
-	<?php
-		/**
-		 * My Account content.
-		 *
-		 * @since 2.6.0
-		 */
-
-    echo ex_wrap('start', 'account');
-  		do_action( 'woocommerce_account_content' );
-  		do_action( 'woocommerce_account_navigation' );
-    echo ex_wrap('end');
-	?>
-</div>
+  echo ex_wrap('start', 'account');
+		do_action( 'woocommerce_account_content' );
+		do_action( 'woocommerce_account_navigation' );
+  echo ex_wrap('end');
+?>

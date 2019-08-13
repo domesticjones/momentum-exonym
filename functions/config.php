@@ -39,3 +39,13 @@ function ex_scripts_and_styles() {
     if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) { wp_enqueue_script( 'comment-reply' ); }
   }
 }
+
+// Get String Between
+function get_string_between($string, $start, $end){
+  $string = ' ' . $string;
+  $ini = strpos($string, $start);
+  if ($ini == 0) return '';
+  $ini += strlen($start);
+  $len = strpos($string, $end, $ini) - $ini;
+  return substr($string, $ini, $len);
+}

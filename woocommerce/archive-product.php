@@ -108,4 +108,7 @@ if ( woocommerce_product_loop() ) {
  */
 //do_action( 'woocommerce_sidebar' );
 
+
+do_action( 'woocommerce_account_navigation' );
+
 get_footer( 'shop' );

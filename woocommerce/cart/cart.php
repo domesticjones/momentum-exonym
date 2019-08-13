@@ -217,4 +217,5 @@ defined( 'ABSPATH' ) || exit;
 <?php
 echo ex_wrap('end');
 	//do_action( 'woocommerce_after_cart' );
+	do_action( 'woocommerce_account_navigation' );
 ?>

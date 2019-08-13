@@ -50,13 +50,31 @@
   </form>
 <?php
   }
+  function ex_wcParseNotes($origin) {
+    $notes = sanitize_text_field($origin);
+    $servicesRaw = get_string_between($notes, '[services]', '[/services]');
+    $services = '';
+    if(!empty($servicesRaw)) {
+      $services = '<p class="services"><strong>Services: </strong>' . $servicesRaw . '</p>';
+    }
+    $areaRaw = get_string_between($notes, '[area]', '[/area]');
+    $area = '';
+    if(!empty($areaRaw)) {
+       $area = '<br />' . $areaRaw;
+    }
+    $sup = '<p class="supervisor"><strong>Supervisor: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
+    $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
+    $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . $area . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
+    return $services . $sup . $sqft . $address;
+  }
+
   function ex_wcOrderNotesJs() {
-    $reviewString = '<h3>Inspection Site Details</h3>' . sanitize_text_field($_POST['customer_notes']) . '<h3>Inspection Details</h3>';
+    $reviewString = '<h3>Inspection Site Details</h3>' . ex_wcParseNotes($_POST['customer_notes']) . '<h3>Inspection Details</h3>';
 ?>
   <script>
     jQuery(document).ready(function() {
-      jQuery('#order_comments').val("<?php echo sanitize_text_field($_POST['customer_notes']); ?>");
-      jQuery('#order_review').prepend("<?php echo $reviewString; ?>");
+      jQuery('#order_comments').val('<?php echo sanitize_text_field($_POST['customer_notes']); ?>');
+      jQuery('#order_review').prepend('<?php echo $reviewString; ?>');
     });
   </script>
 <?php
