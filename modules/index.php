@@ -10,7 +10,7 @@
       } else {
         $textPrint = get_sub_field('cta_schedule_text');
       }
-      $linkPrint = '#schedule';
+      $linkPrint = get_permalink(wc_get_page_id('myaccount'));
       if(is_user_logged_in()) {
         $linkPrint = get_permalink(wc_get_page_id('shop'));
       }

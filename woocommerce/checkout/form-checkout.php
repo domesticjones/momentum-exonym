@@ -27,7 +27,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
 	return;
 }
-
+echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 ?>
 
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
@@ -64,4 +64,4 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 </form>
 
-<?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
+<?php echo '</div>' . ex_wrap('end'); do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

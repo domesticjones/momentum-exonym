@@ -19,12 +19,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-do_action( 'woocommerce_before_customer_login_form' ); ?>
 
-
-
-
-		<h2><?php esc_html_e( 'Register', 'woocommerce' ); ?></h2>
+do_action( 'woocommerce_before_customer_login_form' );
+echo ex_wrap('start', 'fullwidth');
+?>
+  <div class="module-inner">
+    <header class="schedule-header">
+	    <h1><?php esc_html_e( 'Schedule an Appointment', 'woocommerce' ); ?></h1>
+	    <h2><?php esc_html_e( 'Create Account', 'woocommerce' ); ?></h2>
+    </header>
 
 		<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
 
@@ -59,14 +62,17 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 			<?php do_action( 'woocommerce_register_form' ); ?>
 
-			<p class="woocommerce-FormRow form-row">
+			<p class="woocommerce-FormRow form-row cta-wrap">
 				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-				<button type="submit" class="woocommerce-Button button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
+				<button type="submit" class="woocommerce-Button button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Create Account', 'woocommerce' ); ?></button>
 			</p>
 
 			<?php do_action( 'woocommerce_register_form_end' ); ?>
 
 		</form>
+  </div>
 
-
-<?php do_action( 'woocommerce_after_customer_login_form' ); ?>
+<?php
+  echo ex_wrap('end');
+  do_action( 'woocommerce_after_customer_login_form' );
+?>

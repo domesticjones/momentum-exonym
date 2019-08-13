@@ -1,0 +1,49 @@
+.woocommerce-checkout {
+  #customer_details,
+  #order_review_heading,
+  .shop_table th,
+  .shop_table tfoot,
+  .product-quantity,
+  .product-total,
+  .wc_payment_methods {
+    display: none;
+  }
+
+  .woocommerce-privacy-policy-text {
+    font-size: 0.75em;
+    text-align: center;
+  }
+
+  .module-fullwidth {
+    padding-top: 0;
+  }
+
+  #order_review {
+    text-align: center;
+
+    h3 {
+      margin: 2rem 0 0.5rem 0;
+    }
+
+    .shop_table {
+      margin: 0 auto;
+    }
+  }
+
+  dd.variation-BookingDate {
+    padding-top: 1em;
+    font-size: 2em;
+  }
+}
+
+#place_order {
+  @extend .cta-button;
+  @extend .cta-icon-arrow;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+}
+
+.woocommerce-order-details__title {
+  display: none;
+}

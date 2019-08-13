@@ -1,0 +1,49 @@
+.woocommerce-form-register {
+  @include grid(space-between, flex-start, row, wrap);
+
+  .form-row {
+    width: 50%;
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  .woocommerce-Button {
+    @extend .cta-button;
+    @extend .cta-icon-arrow;
+    height: auto;
+    width: auto;
+  }
+
+  .cta-wrap {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .woocommerce-privacy-policy-text {
+    width: 100%;
+    font-size: 0.75em;
+    padding: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .required,
+  .optional {
+    display: none;
+  }
+}
+
+#billing_city_field,
+#billing_state_field,
+#billing_postcode_field {
+  width: 33%;
+}
+
+@media (max-width: 660px) {
+  .woocommerce-form-register .form-row,
+  #billing_city_field,
+  #billing_state_field,
+  #billing_postcode_field {
+    width: 100%;
+    padding: 0;
+  }
+}

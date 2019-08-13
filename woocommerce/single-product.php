@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+
+if(!is_user_logged_in()) {
+	wp_redirect(get_permalink(wc_get_page_id('myaccount')), 302);
+	exit;
+}
+
+
 get_header( 'shop' );
 wc_get_template_part('header', 'schedule');
 

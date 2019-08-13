@@ -54,7 +54,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
               <?php esc_html_e( 'Remember me', 'woocommerce' ); ?>
             </label>
     				<a class="inspection-cancel" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
-    				<a class="inspection-cancel" href="<?php echo esc_url( get_permalink(99999999999999999) ); ?>"><?php esc_html_e( 'Create An Account', 'woocommerce' ); ?></a>
+    				<a class="inspection-cancel" href="<?php echo esc_url( get_permalink(310) ); ?>"><?php esc_html_e( 'Create An Account', 'woocommerce' ); ?></a>
     			</p>
           <p class="login-form-submit">
             <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>

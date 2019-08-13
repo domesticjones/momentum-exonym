@@ -71,6 +71,20 @@
   }
 }
 
+.form-row {
+  label {
+    color: $purple;
+    margin-bottom: 0;
+    font-size: 0.75em;
+    @include fontBold();
+  }
+
+  input,
+  select {
+    margin-top: 0;
+  }
+}
+
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
