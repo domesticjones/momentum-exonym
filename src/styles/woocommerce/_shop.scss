@@ -1,6 +1,16 @@
+.shop-description {
+  max-width: 576px;
+  padding: 2rem;
+  font-size: 1.15em;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+
 .products {
   @include listStripped();
-  @include grid(center, flex-start, row, wrap);
+  @include grid(center, flex-start, column, wrap);
+  max-width: 768px;
+  margin: 0 auto;
 
   .add_to_cart_button {
     display: none;
@@ -8,6 +18,8 @@
 
   li.product {
     min-width: 20%;
+    border-top: 1px solid $grey-medium;
+    width: 100%;
   }
 
   h2 {

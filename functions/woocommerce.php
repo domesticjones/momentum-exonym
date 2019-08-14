@@ -253,3 +253,10 @@
     endswitch;
   }
   add_filter('woocommerce_checkout_get_value', 'ex_wcBillingFillOut', 10, 2);
+
+  // Make Display Name Not Required
+  function wc_save_account_details_required_fields( $required_fields ){
+    unset( $required_fields['account_display_name'] );
+    return $required_fields;
+  }
+  add_filter('woocommerce_save_account_details_required_fields', 'wc_save_account_details_required_fields' );

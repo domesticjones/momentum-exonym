@@ -27,8 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     /* translators: 1: user display name 2: logout url */
     printf(
       __( '<p class="account-hello">Hello %1$s <small>(not %2$s? <a href="%3$s">Logout</a>)</small></p>', 'woocommerce' ),
-      '<strong>' . esc_html( $current_user->billing_first_name . ' ' . $current_user->billing_last_name ) . '</strong>',
-      '<strong>' . esc_html( $current_user->billing_first_name) . '</strong>',
+      '<strong>' . esc_html( $current_user->first_name . ' ' . $current_user->last_name ) . '</strong>',
+      '<strong>' . esc_html( $current_user->first_name) . '</strong>',
       esc_url( wc_logout_url( wc_get_page_permalink( 'myaccount' ) ) )
     );
   ?>

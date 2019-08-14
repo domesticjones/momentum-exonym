@@ -11,7 +11,7 @@ $fh-font-color: $black !default;
 $fh-border-radius: 2px !default;
 $fh-border-width: 1px !default;
 $fh-border-style: solid !default;
-$fh-border-color: $grey !default;
+$fh-border-color: $grey-medium !default;
 
 // Inputs, Textareas, Select, Option
 $fh-input-height: 3em !default;
@@ -241,6 +241,10 @@ input[type="image"] {
   appearance: none;
   border-radius: $fh-border-radius;
   border: $fh-border-width $fh-border-style $fh-border-color;
+
+  &.cta-button {
+    height: auto;
+  }
 }
 
 input[type="image"] {

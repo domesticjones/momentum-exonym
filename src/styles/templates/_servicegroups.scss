@@ -19,6 +19,7 @@
 
   .right {
     width: 30%;
+    border: 1px solid $grey-medium;
   }
 }
 
@@ -29,7 +30,7 @@
 
   & > li {
     @include grid();
-    margin-bottom: 4em;
+    margin-bottom: 1em;
   }
 }
 
@@ -151,12 +152,9 @@
     .left,
     .right { width: 100%; }
   }
-}
 
-@media(max-width: 768px) {
   .service-steps > li {
     @include grid(center, center, column);
-    margin-bottom: 2rem;
   }
 
   .service-thumb {

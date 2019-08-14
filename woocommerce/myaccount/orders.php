@@ -14,13 +14,14 @@
  *
  * @see 	https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.2.0
+ * @version 3.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 echo '<section class="account-data">';
+echo '<h1>My Inspections</h1>';
 do_action( 'woocommerce_before_account_orders', $has_orders );
 if($has_orders):
   echo '<ul class="account-orders">';
@@ -37,43 +38,45 @@ if($has_orders):
     $booking = new WC_Booking($booking_ids[0]);
     //var_dump($booking);
     printf(
-      __( '<li class="account-order">Inspection ID: #%1$s &mdash; Requested date on %2$s.</li>', 'woocommerce' ),
-      '<mark class="order-booking">' . $booking->get_id() . '</mark>',
-      '<mark class="order-booking-date">' .  $booking->get_start_date( null, null, wc_should_convert_timezone( $booking ) ) . '</mark>'
+      __( '<li class="account-order"><span class="order-id">Inspection ID: %1$s</span><span class="order-date">Inspection Date: %2$s</span><i>%3$s</i></li>', 'woocommerce' ),
+      '<mark class="order-booking">#' . $booking->get_id() . '</mark>',
+      '<mark class="order-booking-date">' .  $booking->get_start_date( null, null, wc_should_convert_timezone( $booking ) ) . '</mark>',
+			'<mark class="order-booking-status">' . wc_bookings_get_status_label($booking->get_status()) . '</mark>'
     );
     echo '<li class="account-order-details">';
+	    echo '<mark class="order-type"><p>' . $booking->get_product()->name . '</p></mark>';
+	    echo '<mark class="order-notes">' . ex_wcParseNotes($order->get_customer_note()) . '</mark>';
+	    echo '<mark class="order-created-date"> This inspection was requested in our system on ' . wc_format_datetime( $order->get_date_created() ) . '</mark>';
 
-    echo '<mark class="order-notes">' . $order->get_customer_note() . '</mark>';
-    echo '<mark class="order-date">' . wc_format_datetime( $order->get_date_created() ) . '</mark>';
+	    if ( $notes = $order->get_customer_order_notes() ) : ?>
+	    	<h2><?php _e( 'Order updates', 'woocommerce' ); ?></h2>
+	    	<ol class="woocommerce-OrderUpdates commentlist notes">
+	    		<?php foreach ( $notes as $note ) : ?>
+	    		<li class="woocommerce-OrderUpdate comment note">
+	    			<div class="woocommerce-OrderUpdate-inner comment_container">
+	    				<div class="woocommerce-OrderUpdate-text comment-text">
+	    					<p class="woocommerce-OrderUpdate-meta meta"><?php echo date_i18n( __( 'l jS \o\f F Y, h:ia', 'woocommerce' ), strtotime( $note->comment_date ) ); ?></p>
+	    					<div class="woocommerce-OrderUpdate-description description">
+	    						<?php echo wpautop( wptexturize( $note->comment_content ) ); ?>
+	    					</div>
+	    	  				<div class="clear"></div>
+	    	  			</div>
+	    				<div class="clear"></div>
+	    			</div>
+	    		</li>
+	    		<?php endforeach; ?>
+	    	</ol>
+	    <?php endif; ?>
 
-    if ( $notes = $order->get_customer_order_notes() ) : ?>
-    	<h2><?php _e( 'Order updates', 'woocommerce' ); ?></h2>
-    	<ol class="woocommerce-OrderUpdates commentlist notes">
-    		<?php foreach ( $notes as $note ) : ?>
-    		<li class="woocommerce-OrderUpdate comment note">
-    			<div class="woocommerce-OrderUpdate-inner comment_container">
-    				<div class="woocommerce-OrderUpdate-text comment-text">
-    					<p class="woocommerce-OrderUpdate-meta meta"><?php echo date_i18n( __( 'l jS \o\f F Y, h:ia', 'woocommerce' ), strtotime( $note->comment_date ) ); ?></p>
-    					<div class="woocommerce-OrderUpdate-description description">
-    						<?php echo wpautop( wptexturize( $note->comment_content ) ); ?>
-    					</div>
-    	  				<div class="clear"></div>
-    	  			</div>
-    				<div class="clear"></div>
-    			</div>
-    		</li>
-    		<?php endforeach; ?>
-    	</ol>
-    <?php endif; ?>
-    <?
+			<?php  ?>
+
+
+
+	    <?
     echo '</li>';
   endforeach;
   echo '</ul>';
     ?>
-
-
-
-
 	<?php do_action( 'woocommerce_before_account_orders_pagination' ); ?>
 
 	<?php if ( 1 < $customer_orders->max_num_pages ) : ?>

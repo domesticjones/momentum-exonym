@@ -1,0 +1,115 @@
+.account-orders {
+  @include listStripped();
+  width: 100%;
+
+  li {
+    @include transition();
+    width: 100%;
+  }
+}
+
+li.account-order {
+  @include grid(space-between, stretch);
+  position: relative;
+  border: 1px solid $grey;
+  border-bottom: none;
+  line-height: 1.25;
+  border-radius: 4px 4px 0 0;
+
+  &:hover {
+    background-color: transparentize($grey, 0.5);
+
+    & + li.account-order-details {
+      background-color: transparentize($grey, 0.5);
+    }
+  }
+
+  span {
+    font-size: 0.75em;
+    display: block;
+    color: $blue;
+    @include fontBold();
+    padding: 0.5rem 1rem;
+  }
+
+  mark {
+    display: block;
+    font-size: 1.5em;
+    background-color: transparent;
+    color: $black;
+    @include fontBold(false);
+  }
+
+  i {
+    @include grid(center, center);
+    margin-left: auto;
+    font-size: 0.5em;
+    text-transform: uppercase;
+    @include fontItalic(false);
+    padding: 1rem;
+    background-color: $grey;
+    border-radius: 0 4px 0 4px;
+  }
+}
+
+li.account-order-details {
+  border: 1px solid $grey;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  &:hover {
+    background-color: $grey;
+  }
+
+  mark {
+    display: block;
+    border-top: 1px solid $grey;
+    padding-top: 0.5rem;
+    background-color: transparent;
+
+    p {
+      padding: 0;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+
+      strong {
+        font-size: 0.75em;
+        display: block;
+        color: $blue;
+      }
+    }
+
+    &.order-type {
+      font-size: 1.5em;
+    }
+
+    &.order-created-date {
+      font-size: 0.75em;
+      color: $grey-dark;
+      text-align: right;
+      @include fontItalic();
+    }
+  }
+}
+
+@media (max-width: 660px) {
+  li.account-order {
+    @include grid(center, center, column-reverse);
+
+    span {
+      width: 100%;
+    }
+
+    i {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  li.account-order-details mark.order-created-date {
+    text-align: center;
+  }
+}

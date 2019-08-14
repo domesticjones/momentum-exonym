@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.5.0
+ * @version 3.7.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -189,7 +189,7 @@ defined( 'ABSPATH' ) || exit;
 
 			// Remove
 			echo apply_filters('woocommerce_cart_item_remove_link', sprintf(
-				'<a href="%s" aria-label="%s" data-product_id="%s" data-product_sku="%s" class="inspection-cancel remove">' . $previous . '</a>',
+				'<a href="' . $product_permalink . '" aria-label="%s" data-product_id="%s" data-product_sku="%s" class="inspection-cancel remove">' . $previous . '</a>',
 				esc_url(wc_get_cart_remove_url($cart_item_key)),
 				__('Cancel this Inspection', 'woocommerce'),
 				esc_attr($product_id),

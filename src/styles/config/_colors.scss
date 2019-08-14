@@ -1,5 +1,6 @@
 $white: #fff;
-$grey: #F4F4F4;
+$grey: #f4f4f4;
+$grey-medium: #d3d3d3;
 $grey-dark: #707070;
 $black: #000;
 $purple: #1A0070;
@@ -10,6 +11,7 @@ $aqua: #44C0EB;
 $colorDeck: (
   ('white', $white),
   ('grey', $grey),
+  ('grey-medium', $grey-medium),
   ('grey-dark', $grey-dark),
   ('black', $black),
   ('purple', $purple),

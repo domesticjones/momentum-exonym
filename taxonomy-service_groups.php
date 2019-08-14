@@ -33,7 +33,7 @@
               the_post();
               echo '<li class="service-single"><h3 class="service-single-title">' . get_the_title() . '</h3><div class="service-single-content">' . get_field('description') . ex_cta('arrow', 'More Info on ' . get_the_title(), get_permalink()) . '</div></li>';
             }
-          echo '<ul>';
+          echo '</ul>';
         }
       echo '</div>';
     echo '</div>';

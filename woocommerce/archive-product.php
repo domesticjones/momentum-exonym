@@ -59,6 +59,8 @@ if ( woocommerce_product_loop() ) {
 	 * @hooked woocommerce_catalog_ordering - 30
 	 */
 	//do_action( 'woocommerce_before_shop_loop' );
+	$shopDesc = get_field('inspection_list_content', wc_get_page_id('shop'));
+	if(!empty($shopDesc)) { echo '<p class="shop-description">' . $shopDesc . '</p>'; }
 
 	woocommerce_product_loop_start();
 
