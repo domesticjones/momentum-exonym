@@ -23,21 +23,46 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 <h1>Account Details</h1>
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
-
-	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
+	<p class="woocommerce-form-row woocommerce-form-row--first form-row">
 		<label for="account_first_name"><?php esc_html_e( 'First name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_first_name" id="account_first_name" autocomplete="given-name" value="<?php echo esc_attr( $user->first_name ); ?>" />
 	</p>
-	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row">
 		<label for="account_last_name"><?php esc_html_e( 'Last name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_last_name" id="account_last_name" autocomplete="family-name" value="<?php echo esc_attr( $user->last_name ); ?>" />
 	</p>
-
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row">
+		<label for="billing_company"><?php esc_html_e( 'Company', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_company" id="billing_company" autocomplete="company" value="<?php echo esc_attr( $user->billing_company ); ?>" />
+	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row">
+		<label for="billing_phone"><?php esc_html_e( 'Phone', 'woocommerce' ); ?></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_phone" id="billing_phone" autocomplete="tel" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
+	</p>
 	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 		<label for="account_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="email" class="woocommerce-Input woocommerce-Input--email input-text" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr( $user->user_email ); ?>" />
 	</p>
-
+	<p class="woocommerce-form-row woocommerce-form-row--first form-row">
+		<label for="billing_address_1"><?php esc_html_e( 'Address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_address_1" id="billing_address_1" autocomplete="address-line1" value="<?php echo esc_attr( $user->billing_address_1 ); ?>" />
+	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row">
+		<label for="billing_address_2"><?php esc_html_e( 'Apartment, Suite, etc.', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_address_2" id="billing_address_2" autocomplete="address-line2" value="<?php echo esc_attr( $user->billing_address_2 ); ?>" />
+	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-third">
+		<label for="billing_city"><?php esc_html_e( 'City', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_city" id="billing_city" autocomplete="address-level2" value="<?php echo esc_attr( $user->billing_city ); ?>" />
+	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-third">
+		<label for="billing_state"><?php esc_html_e( 'State', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_state" id="billing_state" autocomplete="address-level1" value="<?php echo esc_attr( $user->billing_state ); ?>" />
+	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-third">
+		<label for="billing_postcode"><?php esc_html_e( 'ZIP', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_postcode" id="billing_postcode" autocomplete="postal-code" value="<?php echo esc_attr( $user->billing_postcode ); ?>" />
+	</p>
 	<fieldset>
 		<legend><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
 

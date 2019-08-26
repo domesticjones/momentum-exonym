@@ -1,0 +1,185 @@
+#admin-account-filters {
+  @include grid(space-between, center, row);
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.admin-account-filter {
+  @include fontBold(false);
+  font-size: 0.5em;
+  letter-spacing: 0.5ex;
+  text-transform: uppercase;
+  width: auto;
+  height: auto;
+  border: none;
+  background-color: $grey;
+  margin-left: 1em;
+  padding: 0.75em 1em;
+  @include transition();
+
+  &.is-active {
+    background-color: $blue;
+    color: $white;
+  }
+}
+
+.admin-filter-date-group {
+  @include grid(flex-start, stretch);
+  margin-right: auto;
+}
+
+.admin-filter-date-presets {
+  @include grid(flex-end, center);
+  margin-left: auto;
+}
+
+#admin-filter-date {
+  width: auto;
+}
+
+#account-filters-submit {
+  @extend .cta-button;
+  @extend .cta-icon-schedule;
+  background-color: $grey-dark;
+  border-color: $grey-dark;
+  width: auto;
+  font-size: 0.75em;
+  border-radius: 0 4px 4px 0;
+
+  span {
+    width: 0px;
+    transform: scaleX(0);
+    transform-origin: left;
+    @include transition();
+  }
+
+  &.is-active {
+    background-color: $blue;
+    border-color: $blue;
+
+    span {
+      padding-left: 0.5em;
+      width: auto;
+      transform: scaleX(1);
+    }
+  }
+
+  &:hover {
+    background-color: $blue;
+    border-color: $blue;
+  }
+
+  &::before {
+    margin: 0 auto;
+  }
+}
+
+.admin-booking-list {
+  @include listStripped();
+  width: 100%;
+
+  li {
+    @include grid(space-between);
+    border: 1px solid $grey-medium;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+    @include transition();
+
+    &:hover {
+      background-color: transparentize($grey, 0.5);
+    }
+  }
+}
+
+.admin-booking-left {
+  width: 30%;
+
+  h2 {
+    font-size: 1em;
+    margin-bottom: 0.25em;
+  }
+
+  span {
+    display: block;
+    font-size: 0.85em;
+  }
+
+  mark {
+    color: $white;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    padding: 0.5em 0.75em;
+    border-radius: 4px;
+
+    &.confirmed, &.paid { background-color: $alert1; }
+    &.unpaid { background-color: $alert3; }
+    &.pending { background-color: $alert2; }
+    &.canceled { background-color: $alert4; }
+    &.complete { background-color: $alert5; }
+  }
+}
+
+.admin-booking-right {
+  width: 70%;
+  padding-left: 1rem;
+
+  p {
+    padding: 0.25em 0;
+    border-bottom: 1px solid $grey-medium;
+  }
+
+  strong {
+    display: none;
+  }
+
+  h3 {
+    color: $blue;
+    margin-bottom: 0.25em;
+  }
+
+  a {
+    color: $blue;
+    display: block;
+    @include fontItalic();
+    font-size: 0.85em;
+    margin-top: 1em;
+    @include transition();
+
+    &:hover {
+      color: $aqua;
+    }
+  }
+
+  .sqft {
+    @include fontItalic();
+    @include fontBold();
+    font-size: 0.75em;
+
+    &::before {content: '('; }
+    &::after {content: ')'; }
+  }
+
+  .supervisor {
+    border-bottom: none;
+
+    strong {
+      display: inline;
+    }
+  }
+
+  .address {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #admin-account-filters, {
+    @include grid(center, center, column);
+  }
+
+  .admin-filter-date-presets,
+  .admin-filter-date-group {
+    margin: 0;
+  }
+}

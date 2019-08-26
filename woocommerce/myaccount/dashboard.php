@@ -33,15 +33,32 @@ if ( ! defined( 'ABSPATH' ) ) {
     );
   ?>
   <div class="account-data-left">
-
-    <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="account-schedule-cta">
-      <span>Schedule Inspection</span>
-    </a>
+		<?php
+			if(current_user_can('manage_woocommerce')) {
+				$adminBookingPageFind = [
+			    'post_type' => 'page',
+			    'fields' => 'ids',
+			    'nopaging' => true,
+			    'meta_key' => '_wp_page_template',
+			    'meta_value' => 'admin-bookings.php'
+				];
+				$adminBookingPage = get_posts($adminBookingPageFind);
+		    $timeZone = get_option('timezone_string');
+		    $todayRaw = new DateTime('now', new DateTimezone($timeZone));
+		    $today = $todayRaw->format('Y-m-d');
+				echo '<a href="' . get_permalink($adminBookingPage[0]) . '?dateFilter=' . $todayRaw->format('Y-m-d') . '" class="account-schedule-cta"><span>Edit Bookings</span></a>';
+			} else {
+				echo '<a href="' . get_permalink(wc_get_page_id('shop')) . '" class="account-schedule-cta"><span>Schedule Inspection</span></a>';
+			}
+		?>
   </div>
   <div class="account-data-right">
-    <a href="<?php echo wc_get_account_endpoint_url('orders'); ?>" class="account-schedule-cta">
-      <span>View My Inspections</span>
-    </a>
+		<?php
+			if(current_user_can('manage_woocommerce')) {
+			} else {
+				echo '<a href="' . wc_get_account_endpoint_url('orders') . '" class="account-schedule-cta"><span>View My Inspections</span></a>';
+			}
+		?>
   </div>
 
 <?php

@@ -28,11 +28,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</li>
 		<?php endforeach; */ ?>
 
-    <li class="account-nav-dashboard<?php if(is_account_page() && !is_wc_endpoint_url('orders') && !is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('dashboard'); ?>"><span>Dashboard</span><i>Account</i></a></li>
-    <li class="account-nav-schedule<?php if(is_shop() || is_cart() || is_checkout() || is_product()) { echo ' is-active'; } ?>"><a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>"><span>Schedule Inspection</span><i>Schedule</i></a></li>
-    <li class="account-nav-orders<?php if(is_wc_endpoint_url('orders')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('orders'); ?>"><span>My Inspections</span><i>Inspections</i></a></li>
-    <li class="account-nav-profile<?php if(is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>"><span>Account Details</span><i>Profile</i></a></li>
-    <li class="account-nav-logout"><a href="<?php echo wc_get_account_endpoint_url('logout'); ?>"><span>Logout</span><i>Logout</i></a></li>
+		<?php
+			if(current_user_can('manage_woocommerce')) {
+				$adminBookingPageFind = [
+					'post_type' => 'page',
+					'fields' => 'ids',
+					'nopaging' => true,
+					'meta_key' => '_wp_page_template',
+					'meta_value' => 'admin-bookings.php'
+				];
+				$adminBookingPage = get_posts($adminBookingPageFind);
+		    $timeZone = get_option('timezone_string');
+				$todayRaw = new DateTime('now', new DateTimezone($timeZone));
+			?>
+				<li class="account-nav-dashboard<?php if(is_account_page() && !is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('dashboard'); ?>"><span>Dashboard</span><i>Dashboard</i></a></li>
+				<li class="account-nav-schedule<?php if(get_the_id() == $adminBookingPage[0]) { echo ' is-active'; } ?>"><a href="<?php echo get_permalink($adminBookingPage[0]) . '?dateFilter=' . $todayRaw->format('Y-m-d'); ?>"><span>View Appointments</span><i>Appointments</i></a></li>
+				<li class="account-nav-profile<?php if(is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>"><span>Account Details</span><i>Profile</i></a></li>
+				<li class="account-nav-logout"><a href="<?php echo wc_get_account_endpoint_url('logout'); ?>"><span>Logout</span><i>Logout</i></a></li>
+				<?php
+			} else {
+				?>
+				<li class="account-nav-dashboard<?php if(is_account_page() && !is_wc_endpoint_url('orders') && !is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('dashboard'); ?>"><span>Dashboard</span><i>Account</i></a></li>
+				<li class="account-nav-schedule<?php if(is_shop() || is_cart() || is_checkout() || is_product()) { echo ' is-active'; } ?>"><a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>"><span>Schedule Inspection</span><i>Schedule</i></a></li>
+				<li class="account-nav-orders<?php if(is_wc_endpoint_url('orders')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('orders'); ?>"><span>My Inspections</span><i>Inspections</i></a></li>
+				<li class="account-nav-profile<?php if(is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>"><span>Account Details</span><i>Profile</i></a></li>
+				<li class="account-nav-logout"><a href="<?php echo wc_get_account_endpoint_url('logout'); ?>"><span>Logout</span><i>Logout</i></a></li>
+			<?php
+			}
+		?>
 	</ul>
 </nav>
 

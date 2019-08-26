@@ -157,6 +157,10 @@ a.account-schedule-cta {
     &-wide {
       width: 100%;
     }
+
+    &-third {
+      width: calc(33.333% - 1rem);
+    }
   }
 
   fieldset {

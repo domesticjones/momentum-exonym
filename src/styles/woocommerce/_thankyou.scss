@@ -16,20 +16,6 @@
   }
 }
 
-.order-received-left {
-  .supervisor,
-  .services,
-  .sqft {
-    display: none;
-  }
-}
-
-.order-received-right {
-  .address {
-    display: none;
-  }
-}
-
 .order-received-accountlink.inspection-cancel {
   @include grid(center, center);
   padding: 2rem;

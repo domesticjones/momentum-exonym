@@ -50,7 +50,7 @@
   </form>
 <?php
   }
-  function ex_wcParseNotes($origin) {
+  function ex_wcParseNotes($origin, $output = null) {
     $notes = sanitize_text_field($origin);
     $servicesRaw = get_string_between($notes, '[services]', '[/services]');
     $services = '';
@@ -60,12 +60,19 @@
     $areaRaw = get_string_between($notes, '[area]', '[/area]');
     $area = '';
     if(!empty($areaRaw)) {
-       $area = '<br />' . $areaRaw;
+      $area = '<br />' . $areaRaw;
     }
-    $sup = '<p class="supervisor"><strong>Supervisor: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
+    $sup = '<p class="supervisor"><strong>Site Supervisor: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
     $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
     $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . $area . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
-    return $services . $sup . $sqft . $address;
+    if($output) {
+      if($output == 'services') { return $services; }
+      elseif($output == 'sup') { return $sup; }
+      elseif($output == 'sqft') { return $sqft; }
+      elseif($output == 'address') { return $address; }
+    } else {
+      return $services . $sup . $sqft . $address;
+    }
   }
 
   function ex_wcOrderNotesJs() {
@@ -260,3 +267,15 @@
     return $required_fields;
   }
   add_filter('woocommerce_save_account_details_required_fields', 'wc_save_account_details_required_fields' );
+
+  // Save Billing Info on Edit Account Page
+  function ex_wcAccountDetailFields($user_id) {
+    if(isset($_POST['billing_phone'])) {   update_user_meta($user_id, 'billing_phone', sanitize_text_field($_POST['billing_phone'])); }
+    if(isset($_POST['billing_company'])) {   update_user_meta($user_id, 'billing_company', sanitize_text_field($_POST['billing_company'])); }
+    if(isset($_POST['billing_address_1'])) {   update_user_meta($user_id, 'billing_address_1', sanitize_text_field($_POST['billing_address_1'])); }
+    if(isset($_POST['billing_address_2'])) {   update_user_meta($user_id, 'billing_address_2', sanitize_text_field($_POST['billing_address_2'])); }
+    if(isset($_POST['billing_city'])) {   update_user_meta($user_id, 'billing_city', sanitize_text_field($_POST['billing_city'])); }
+    if(isset($_POST['billing_state'])) {   update_user_meta($user_id, 'billing_state', sanitize_text_field($_POST['billing_state'])); }
+    if(isset($_POST['billing_postcode'])) {   update_user_meta($user_id, 'billing_postcode', sanitize_text_field($_POST['billing_postcode'])); }
+  }
+  add_action('woocommerce_save_account_details', 'ex_wcAccountDetailFields', 12, 1);

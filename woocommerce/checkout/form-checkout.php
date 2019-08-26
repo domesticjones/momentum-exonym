@@ -58,6 +58,7 @@ echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 
 	<div id="order_review" class="woocommerce-checkout-review-order">
 		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+		<button id="submit_appointment" type="submit" class="cta-button cta-icon-arrow">Submit Appointment</button>
 	</div>
 
 	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>

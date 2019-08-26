@@ -13,6 +13,8 @@ export default {
   		$this.toggleClass('is-active');
   		$('#nav-responsive').toggleClass('is-active');
   	});
+
+
   },
   finalize() {
   	// MODULES: Parallax
@@ -103,10 +105,10 @@ export default {
       $('#customer_notes_text').val(details);
       const custNotes = $('#customer_notes_text').val();
       $('#customer_notes').val(custNotes);
-      if(sup.length && supTel.length && sqft.length && city.length && state.length && zip.length) {
+      if(sup.length && supTel.length && sqft.length && lot.length && subdivision.length && city.length && state.length && zip.length) {
         $('#checkout_form').submit();
       } else {
-        alert('Supervisor name, phone, total square feet, and city/state/zip are required.');
+        alert('Supervisor name, phone, total square feet, lot, subdivision, and city/state/zip are required.');
       }
     });
 
@@ -122,6 +124,28 @@ export default {
         $this.addClass('is-active');
         $this.next().slideDown();
       }
+    });
+
+    // ADMIN: Date Filter Presets
+    $('.admin-account-filter').click(e => {
+      e.preventDefault();
+      const $this = $(e.currentTarget);
+      const val = $this.data('date');
+      $('#admin-filter-date').val(val);
+      $('#admin-account-filters').submit();
+    });
+
+    $('#admin-account-filters').on('submit', (e) => {
+      const dateVal = $('#admin-filter-date').val();
+      if(dateVal.length == 0) {
+        e.preventDefault();
+        alert('Please select a date');
+      }
+    });
+
+    // ADMIN: Show Change Date Button onChange
+    $('#admin-filter-date').change(() => {
+      $('#account-filters-submit').addClass('is-active');
     });
   },
 };

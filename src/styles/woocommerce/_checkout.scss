@@ -24,12 +24,12 @@
     text-align: center;
 
     h3 {
-      margin: 2rem 0 0.5rem 0;
+      margin: 0 0 0.5rem 0;
       width: 100%;
     }
 
     p {
-      padding: 1rem;
+      padding: 0 1rem 1rem 1rem;
 
       strong {
         display: block;
@@ -44,17 +44,25 @@
   }
 
   dd.variation-BookingDate {
-    padding-top: 1em;
-    font-size: 2em;
+    padding-top: 0em;
+    font-size: 1em;
+    margin-bottom: 1em;
+
+    p {
+      padding: 0 !important;
+      color: $black;
+      @include fontItalic(false);
+      @include fontBold();
+    }
   }
 }
 
 #place_order {
-  @extend .cta-button;
-  @extend .cta-icon-arrow;
-  height: auto;
+  display: none;
+}
+
+#submit_appointment {
   width: auto;
-  margin: 0 auto;
 }
 
 .woocommerce-order-details__title {
