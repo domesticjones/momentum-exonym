@@ -33,6 +33,7 @@
     "wpackagist-plugin/post-types-order": "*",
     "wpackagist-plugin/simple-taxonomy-ordering": "*",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "wpackagist-plugin/woo-preview-emails": "*",
     "wpackagist-plugin/woocommerce": "3.7.0",
     "wpackagist-plugin/product-input-fields-for-woocommerce": "1.2.4"
   }

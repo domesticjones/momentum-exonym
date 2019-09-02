@@ -98,10 +98,10 @@ export default {
         servicesPrint = `[services]${services}[/services]`;
       }
       let areaPrint = '';
-      if(lot.length >0 || subdivision.length > 0) {
-        areaPrint = `[area]${lot} ${subdivision}[/area]`;
+      if(lot.length > 0 || subdivision.length > 0) {
+        areaPrint = `[area]${lot} - ${subdivision}[/area]`;
       }
-      const details = `${servicesPrint}[sup]${sup} (${supTel})[/sup][sqft]${sqft} sqft[/sqft][address]${address}[/address]${areaPrint}[locale]${city}, ${state} ${zip}[/locale]`;
+      const details = `${servicesPrint}[sup]${sup} (${supTel})[/sup][sqft]${sqft} sqft[/sqft]${areaPrint}[address]${address}[/address][locale]${city}, ${state} ${zip}[/locale]`;
       $('#customer_notes_text').val(details);
       const custNotes = $('#customer_notes_text').val();
       $('#customer_notes').val(custNotes);
@@ -109,20 +109,6 @@ export default {
         $('#checkout_form').submit();
       } else {
         alert('Supervisor name, phone, total square feet, lot, subdivision, and city/state/zip are required.');
-      }
-    });
-
-    // MODULE: Services Accordion
-    $('.service-single-title').click(e => {
-      const $this = $(e.currentTarget);
-      if($this.hasClass('is-active')) {
-        $this.removeClass('is-active');
-        $this.next().slideUp();
-      } else {
-        $('.service-single-title').removeClass('is-active');
-        $('.service-single-content').slideUp();
-        $this.addClass('is-active');
-        $this.next().slideDown();
       }
     });
 

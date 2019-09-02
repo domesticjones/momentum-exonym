@@ -44,23 +44,23 @@ echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 			$booking_ids = $booking_data->get_booking_ids_from_order_id( $order->get_id() );
 		}
 		$booking = new WC_Booking($booking_ids[0]);
-		$title = '<h3>' . $booking->get_product()->get_title() . '</h3>';
-		$date = '<p><strong>Inspection Request Date: </strong>' . $booking->get_start_date(null, null, wc_should_convert_timezone($booking)) . '</p>';
+		$title = '<p class="inspection"><strong>Inspection:</strong>' . $booking->get_product()->get_title() . '</p>';
+		$date = '<p><strong>Requested Inspection Date: </strong>' . $booking->get_start_date(null, null, wc_should_convert_timezone($booking)) . '</p>';
 		$note = $order->get_customer_note();
 		echo '<section class="order-received-left">';
 			echo $title;
 			echo ex_wcParseNotes($note, 'services');
 			echo $date;
+			echo ex_wcParseNotes($note, 'sup');
 		echo '</section>';
 		echo '<section class="order-received-right">';
+			echo ex_wcParseNotes($note, 'area');
 			echo ex_wcParseNotes($note, 'address');
 			echo ex_wcParseNotes($note, 'sqft');
-			echo ex_wcParseNotes($note, 'sup');
 		echo '</section>';
 		echo ex_cta('schedule', 'Schedule Another');
     echo '<a href="' . get_permalink(wc_get_page_id('myaccount')) . '" class="order-received-accountlink inspection-cancel">Go to My Account</a>';
-
-		?>
+	?>
 
 	<?php else : ?>
 

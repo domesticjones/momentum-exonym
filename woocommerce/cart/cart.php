@@ -179,8 +179,6 @@ defined( 'ABSPATH' ) || exit;
 			$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 			$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 
-
-
 			// Name & Services
 			echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', '<h2>' . $_product->get_name() . '</h2>', $cart_item, $cart_item_key ) . '&nbsp;' );
 

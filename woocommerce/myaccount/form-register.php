@@ -62,6 +62,13 @@ echo ex_wrap('start', 'fullwidth');
 
 			<?php do_action( 'woocommerce_register_form' ); ?>
 
+			<header class="schedule-header">
+				<h2>Accounts Recievable</h2>
+			</header>
+			<p class="woocommerce-FormRow form-row">
+
+			</p>
+
 			<p class="woocommerce-FormRow form-row cta-wrap">
 				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
 				<button type="submit" class="woocommerce-Button button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Create Account', 'woocommerce' ); ?></button>
@@ -71,7 +78,6 @@ echo ex_wrap('start', 'fullwidth');
 
 		</form>
   </div>
-
 <?php
   echo ex_wrap('end');
   do_action( 'woocommerce_after_customer_login_form' );

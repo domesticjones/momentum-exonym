@@ -64,14 +64,17 @@
     }
     $sup = '<p class="supervisor"><strong>Site Supervisor: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
     $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
-    $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . $area . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
+    $area = '<p class="area">' . '<strong>Area: </strong>' . get_string_between($notes, '[area]', '[/area]') . '</p>';
+    $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
+
     if($output) {
       if($output == 'services') { return $services; }
       elseif($output == 'sup') { return $sup; }
       elseif($output == 'sqft') { return $sqft; }
+      elseif($output == 'area') { return $area; }
       elseif($output == 'address') { return $address; }
     } else {
-      return $services . $sup . $sqft . $address;
+      return $services . $sup . $sqft . $area . $address;
     }
   }
 
@@ -279,3 +282,16 @@
     if(isset($_POST['billing_postcode'])) {   update_user_meta($user_id, 'billing_postcode', sanitize_text_field($_POST['billing_postcode'])); }
   }
   add_action('woocommerce_save_account_details', 'ex_wcAccountDetailFields', 12, 1);
+
+
+
+  // Check Email Styling
+  function preview_email() {
+    global $booking;
+    $filename = $_GET['file'];
+    $orderId  = $_GET['booking'];
+    $booking  = new WC_Booking($orderId);
+    include (get_template_directory() . '/woocommerce-bookings/emails/' . $filename);
+    return null;
+  }
+  add_action('wp_ajax_previewemail', 'preview_email');
