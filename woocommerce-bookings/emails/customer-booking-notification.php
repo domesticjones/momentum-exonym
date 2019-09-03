@@ -21,6 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 do_action( 'woocommerce_email_header', $email_heading );
+
+	$order = $booking->get_order();
+	$notes = $order->customer_note;
+	$services = ex_wcParseNotes($notes, 'services');
+
+if ( $order ) {
+	if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+		$first_name = $order->billing_first_name;
+		$last_name  = $order->billing_last_name;
+	} else {
+		$first_name 		= $order->get_billing_first_name();
+		$last_name  		= $order->get_billing_last_name();
+		$company				= $order->get_billing_company();
+		$accounts				= get_user_meta($order->user->ID, 'accounts_person')[0];
+		$accountsEmail	= get_user_meta($order->user->ID, 'accounts_email')[0];
+	}
+}
 ?>
 
 <?php echo esc_html( wpautop( wptexturize( $notification_message ) ) ); ?>
@@ -28,11 +45,15 @@ do_action( 'woocommerce_email_header', $email_heading );
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
 		<tr>
-			<th scope="row" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Booked Product', 'woocommerce-bookings' ); ?></th>
-			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_product()->get_title() ); ?></td>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Billing Info', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo $company . '<br />' . $accounts . '<br/><a href="mailto:' . $accountsEmail . '">' . $accountsEmail . '</a>'; ?></td>
 		</tr>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Booking ID', 'woocommerce-bookings' ); ?></th>
+			<th scope="row" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Inspection Request', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_product()->get_title() ); echo $services ? $services : ''; ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment ID', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_id() ); ?></td>
 		</tr>
 		<?php
@@ -46,13 +67,23 @@ do_action( 'woocommerce_email_header', $email_heading );
 			</tr>
 		<?php endif; ?>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Booking Start Date', 'woocommerce-bookings' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Date', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_start_date( null, null, wc_should_convert_timezone( $booking ) ) ); ?></td>
 		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Location', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'area') . ex_wcParseNotes($notes, 'address'); ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Details', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'sup') . ex_wcParseNotes($notes, 'sqft') . ex_wcParseNotes($notes, 'manualj'); ?></td>
+		</tr>
+		<?php /*
 		<tr>
 			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Booking End Date', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_end_date( null, null, wc_should_convert_timezone( $booking ) ) ); ?></td>
 		</tr>
+		*/ ?>
 		<?php if ( wc_should_convert_timezone( $booking ) ) : ?>
 		<tr>
 			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Time Zone', 'woocommerce-bookings' ); ?></th>
@@ -61,17 +92,16 @@ do_action( 'woocommerce_email_header', $email_heading );
 		<?php endif; ?>
 		<?php if ( $booking->has_persons() ) : ?>
 			<?php
-			foreach ( $booking->get_persons() as $id => $qty ) :
-				if ( 0 === $qty ) {
-					continue;
-				}
-
+				foreach ( $booking->get_persons() as $id => $qty ) :
+					if ( 0 === $qty ) {
+						continue;
+					}
 				$person_type = ( 0 < $id ) ? get_the_title( $id ) : __( 'Person(s)', 'woocommerce-bookings' );
-				?>
-				<tr>
-					<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php echo esc_html( $person_type ); ?></th>
-					<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $qty ); ?></td>
-				</tr>
+			?>
+			<tr>
+				<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php echo esc_html( $person_type ); ?></th>
+				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $qty ); ?></td>
+			</tr>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</tbody>

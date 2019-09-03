@@ -41,31 +41,13 @@ if ( $order ) {
 		$first_name = $order->billing_first_name;
 		$last_name  = $order->billing_last_name;
 	} else {
-		$first_name = $order->get_billing_first_name();
-		$last_name  = $order->get_billing_last_name();
-		$company  = $order->get_billing_company();
+		$first_name 		= $order->get_billing_first_name();
+		$last_name  		= $order->get_billing_last_name();
+		$company				= $order->get_billing_company();
+		$accounts				= get_user_meta($order->user->ID, 'accounts_person')[0];
+		$accountsEmail	= get_user_meta($order->user->ID, 'accounts_email')[0];
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// Make a new table for all the billing information.
-
-
-
-
-
-
-
 ?>
 
 <?php if ( ! empty( $first_name ) && ! empty( $last_name ) ) : ?>
@@ -77,6 +59,10 @@ if ( $order ) {
 
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Billing Info', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo $company . '<br />' . $accounts . '<br/><a href="mailto:' . $accountsEmail . '">' . $accountsEmail . '</a>'; ?></td>
+		</tr>
 		<tr>
 			<th scope="row" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Inspection Request', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_product()->get_title() ); echo $services ? $services : ''; ?></td>
@@ -100,8 +86,12 @@ if ( $order ) {
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_start_date( null, null, wc_should_convert_timezone( $booking ) ) ); ?></td>
 		</tr>
 		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Location', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'area') . ex_wcParseNotes($notes, 'address'); ?></td>
+		</tr>
+		<tr>
 			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Details', 'woocommerce-bookings' ); ?></th>
-			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes); ?></td>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'sup') . ex_wcParseNotes($notes, 'sqft') . ex_wcParseNotes($notes, 'manualj'); ?></td>
 		</tr>
 		<?php /*
 		<tr>
@@ -117,17 +107,16 @@ if ( $order ) {
 		<?php endif; ?>
 		<?php if ( $booking->has_persons() ) : ?>
 			<?php
-			foreach ( $booking->get_persons() as $id => $qty ) :
-				if ( 0 === $qty ) {
-					continue;
-				}
-
+				foreach ( $booking->get_persons() as $id => $qty ) :
+					if ( 0 === $qty ) {
+						continue;
+					}
 				$person_type = ( 0 < $id ) ? get_the_title( $id ) : __( 'Person(s)', 'woocommerce-bookings' );
-				?>
-				<tr>
-					<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php echo esc_html( $person_type ); ?></th>
-					<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $qty ); ?></td>
-				</tr>
+			?>
+			<tr>
+				<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php echo esc_html( $person_type ); ?></th>
+				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $qty ); ?></td>
+			</tr>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</tbody>
@@ -137,10 +126,18 @@ if ( $order ) {
 <p><?php esc_html_e( 'This appointment is pending your confirmation.', 'woocommerce-bookings' ); ?></p>
 <?php endif; ?>
 
-<p>
+<p style="font-size: 1.25em; font-weight: bold; text-align: center;">
 <?php
 /* translators: 1: a href to booking */
-echo wp_kses_post( make_clickable( sprintf( __( 'You can view and edit this appointment in the dashboard here: %s', 'woocommerce-bookings' ), admin_url( 'post.php?post=' . $booking->get_id() . '&action=edit' ) ) ) );
+$adminBookingPageFind = [
+	'post_type' => 'page',
+	'fields' => 'ids',
+	'nopaging' => true,
+	'meta_key' => '_wp_page_template',
+	'meta_value' => 'admin-bookings.php'
+];
+$adminBookingPage = get_posts($adminBookingPageFind);
+echo wp_kses_post( make_clickable( sprintf( __( 'Confirm appointment: %s', 'woocommerce-bookings' ), get_permalink($adminBookingPage[0]) . '?idFilter=' . $booking->get_id() ) ) );
 ?>
 </p>
 

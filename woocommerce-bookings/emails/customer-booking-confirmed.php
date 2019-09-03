@@ -20,28 +20,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-do_action( 'woocommerce_email_header', $email_heading );
+	do_action( 'woocommerce_email_header', $email_heading );
+
+		$order = $booking->get_order();
+		$notes = $order->customer_note;
+		$services = ex_wcParseNotes($notes, 'services');
+
+	if ( $order ) {
+		if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+			$first_name = $order->billing_first_name;
+			$last_name  = $order->billing_last_name;
+		} else {
+			$first_name 		= $order->get_billing_first_name();
+			$last_name  		= $order->get_billing_last_name();
+			$company				= $order->get_billing_company();
+			$accounts				= get_user_meta($order->user->ID, 'accounts_person')[0];
+			$accountsEmail	= get_user_meta($order->user->ID, 'accounts_email')[0];
+		}
+	}
 ?>
 
-<?php if ( $booking->get_order() ) : ?>
-	<p>
-	<?php
-	/* translators: 1: billing first name */
-	echo esc_html( sprintf( __( 'Hello %s', 'woocommerce-bookings' ), ( is_callable( array( $booking->get_order(), 'get_billing_first_name' ) ) ? $booking->get_order()->get_billing_first_name() : $booking->get_order()->billing_first_name ) ) );
-	?>
-	</p>
-<?php endif; ?>
-
-<p><?php esc_html_e( 'Your booking has been confirmed. The details of your booking are shown below.', 'woocommerce-bookings' ); ?></p>
+<p><?php esc_html_e( 'Hello ' . $first_name . ',', 'woocommerce-bookings' ); ?></p>
+<p><?php esc_html_e( 'Your inspection appointment has been confirmed. The details of your inspection are shown below.', 'woocommerce-bookings' ); ?></p>
 
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
 		<tr>
-			<th scope="row" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Booked Product', 'woocommerce-bookings' ); ?></th>
-			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_product()->get_title() ); ?></td>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Billing Info', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo $company . '<br />' . $accounts . '<br/><a href="mailto:' . $accountsEmail . '">' . $accountsEmail . '</a>'; ?></td>
 		</tr>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Booking ID', 'woocommerce-bookings' ); ?></th>
+			<th scope="row" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Inspection Request', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_product()->get_title() ); echo $services ? $services : ''; ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment ID', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_id() ); ?></td>
 		</tr>
 		<?php
@@ -55,13 +68,23 @@ do_action( 'woocommerce_email_header', $email_heading );
 			</tr>
 		<?php endif; ?>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Booking Start Date', 'woocommerce-bookings' ); ?></th>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Date', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_start_date( null, null, wc_should_convert_timezone( $booking ) ) ); ?></td>
 		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Location', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'area') . ex_wcParseNotes($notes, 'address'); ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Details', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'sup') . ex_wcParseNotes($notes, 'sqft') . ex_wcParseNotes($notes, 'manualj'); ?></td>
+		</tr>
+		<?php /*
 		<tr>
 			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Booking End Date', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_end_date( null, null, wc_should_convert_timezone( $booking ) ) ); ?></td>
 		</tr>
+		*/ ?>
 		<?php if ( wc_should_convert_timezone( $booking ) ) : ?>
 		<tr>
 			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Time Zone', 'woocommerce-bookings' ); ?></th>
@@ -70,110 +93,27 @@ do_action( 'woocommerce_email_header', $email_heading );
 		<?php endif; ?>
 		<?php if ( $booking->has_persons() ) : ?>
 			<?php
-			foreach ( $booking->get_persons() as $id => $qty ) :
-				if ( 0 === $qty ) {
-					continue;
-				}
-
+				foreach ( $booking->get_persons() as $id => $qty ) :
+					if ( 0 === $qty ) {
+						continue;
+					}
 				$person_type = ( 0 < $id ) ? get_the_title( $id ) : __( 'Person(s)', 'woocommerce-bookings' );
-				?>
-				<tr>
-					<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php echo esc_html( $person_type ); ?></th>
-					<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $qty ); ?></td>
-				</tr>
+			?>
+			<tr>
+				<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php echo esc_html( $person_type ); ?></th>
+				<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $qty ); ?></td>
+			</tr>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</tbody>
 </table>
 
-<?php
-$order = $booking->get_order();
-if ( $order ) :
-	?>
-
-	<?php if ( 'pending' === $order->get_status() ) : ?>
-		<p>
-		<?php
-		/* translators: 1: checkout payment url */
-		echo wp_kses_post( sprintf( __( 'To pay for this booking please use the following link: %s', 'woocommerce-bookings' ), '<a href="' . esc_url( $order->get_checkout_payment_url() ) . '">' . __( 'Pay for booking', 'woocommerce-bookings' ) . '</a>' ) );
-		?>
-		</p>
-	<?php endif; ?>
-
-	<?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
-
-	<h2>
-	<?php
-
-	$pre_wc_30 = version_compare( WC_VERSION, '3.0', '<' );
-	if ( $pre_wc_30 ) {
-		$order_date = $order->order_date;
-	} else {
-		$order_date = $order->get_date_created() ? $order->get_date_created()->date( 'Y-m-d H:i:s' ) : '';
-	}
-
-	echo esc_html( __( 'Order', 'woocommerce-bookings' ) . ': ' . $order->get_order_number() );
-	?>
-	(
-	<?php
-	echo wp_kses_post( sprintf( '<time datetime="%s">%s</time>', date_i18n( 'c', strtotime( $order_date ) ), date_i18n( wc_date_format(), strtotime( $order_date ) ) ) );
-	?>
-	)</h2>
-
-	<table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
-		<thead>
-			<tr>
-				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Product', 'woocommerce-bookings' ); ?></th>
-				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Quantity', 'woocommerce-bookings' ); ?></th>
-				<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Price', 'woocommerce-bookings' ); ?></th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php
-			switch ( $order->get_status() ) {
-
-				case 'completed':
-					echo wp_kses_post( $pre_wc_30 ? $order->email_order_items_table( array( 'show_sku' => false ) ) : wc_get_email_order_items( $order, array( 'show_sku' => false ) ) );
-					break;
-
-				case 'processing':
-				default:
-					echo wp_kses_post( $pre_wc_30 ? $order->email_order_items_table( array( 'show_sku' => true ) ) : wc_get_email_order_items( $order, array( 'show_sku' => true ) ) );
-					break;
-			}
-			?>
-		</tbody>
-		<tfoot>
-			<?php
-			$totals = $order->get_order_item_totals();
-			if ( $totals ) {
-				$i = 0;
-				foreach ( $totals as $total ) {
-					$i++;
-					?>
-					<tr>
-						<th scope="row" colspan="2" style="text-align:left; border: 1px solid #eee; <?php
-						if ( 1 === $i ) {
-							echo 'border-top-width: 4px;';
-						}
-						?>"><?php echo esc_html( $total['label'] ); ?></th>
-						<td style="text-align:left; border: 1px solid #eee; <?php
-						if ( 1 === $i ) {
-							echo 'border-top-width: 4px;';
-						}
-						?>"><?php echo esc_html( $total['value'] ); ?></td>
-					</tr>
-					<?php
-				}
-			}
-			?>
-		</tfoot>
-	</table>
+<p><?php echo wc_get_privacy_policy_text('checkout'); ?></p>
+<p style="font-size: 1.25em; font-weight: bold; text-align: center;">If anything about this inspection has changed, please <a href="<?php echo home_url('/contact'); ?>">Contact Us</a><small style="display: block; font-size: 0.75em"></small></p>
 
 	<?php do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
 
 	<?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email ); ?>
 
-<?php endif; ?>
 
 <?php do_action( 'woocommerce_email_footer' ); ?>

@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		    $timeZone = get_option('timezone_string');
 		    $todayRaw = new DateTime('now', new DateTimezone($timeZone));
 		    $today = $todayRaw->format('Y-m-d');
-				echo '<a href="' . get_permalink($adminBookingPage[0]) . '?dateFilter=' . $todayRaw->format('Y-m-d') . '" class="account-schedule-cta"><span>Edit Bookings</span></a>';
+				echo '<a href="' . get_permalink($adminBookingPage[0]) . '?dateFilter=' . $todayRaw->format('Y-m-d') . '" class="account-schedule-cta"><span>Today\'s Appointments</span></a>';
 			} else {
 				echo '<a href="' . get_permalink(wc_get_page_id('shop')) . '" class="account-schedule-cta"><span>Schedule Inspection</span></a>';
 			}
@@ -55,6 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="account-data-right">
 		<?php
 			if(current_user_can('manage_woocommerce')) {
+				echo '<a href="' . get_permalink($adminBookingPage[0]) . '?statusFilter=pending-confirmation" class="account-schedule-cta"><span>Pending Appointments</span></a>';
 			} else {
 				echo '<a href="' . wc_get_account_endpoint_url('orders') . '" class="account-schedule-cta"><span>View My Inspections</span></a>';
 			}
