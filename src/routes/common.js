@@ -92,6 +92,7 @@ export default {
       const city = $('#details-city').val();
       const state = $('#details-state').val();
       const zip = $('#details-zip').val();
+      const manualj = $('#details-manualj').val();
       const services = $('.alg-pif-dd').text();
       let servicesPrint = '';
       if(services.length > 0) {
@@ -101,7 +102,7 @@ export default {
       if(lot.length > 0 || subdivision.length > 0) {
         areaPrint = `[area]${lot} - ${subdivision}[/area]`;
       }
-      const details = `${servicesPrint}[sup]${sup} (${supTel})[/sup][sqft]${sqft} sqft[/sqft]${areaPrint}[address]${address}[/address][locale]${city}, ${state} ${zip}[/locale]`;
+      const details = `${servicesPrint}[sup]${sup} (${supTel})[/sup][sqft]${sqft} sqft[/sqft]${areaPrint}[address]${address}[/address][locale]${city}, ${state} ${zip}[/locale][manualj]${manualj}[/manualj]`;
       $('#customer_notes_text').val(details);
       const custNotes = $('#customer_notes_text').val();
       $('#customer_notes').val(custNotes);
@@ -113,7 +114,7 @@ export default {
     });
 
     // ADMIN: Date Filter Presets
-    $('.admin-account-filter').click(e => {
+    $('#admin-account-filters .admin-account-filter').click(e => {
       e.preventDefault();
       const $this = $(e.currentTarget);
       const val = $this.data('date');
@@ -121,17 +122,12 @@ export default {
       $('#admin-account-filters').submit();
     });
 
-    $('#admin-account-filters').on('submit', (e) => {
-      const dateVal = $('#admin-filter-date').val();
-      if(dateVal.length == 0) {
-        e.preventDefault();
-        alert('Please select a date');
-      }
-    });
-
     // ADMIN: Show Change Date Button onChange
     $('#admin-filter-date').change(() => {
       $('#account-filters-submit').addClass('is-active');
+    });
+    $('#admin-filter-search').change(() => {
+      $('#account-browse-submit').addClass('is-active');
     });
   },
 };

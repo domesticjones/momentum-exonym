@@ -66,15 +66,22 @@
     $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
     $area = '<p class="area">' . '<strong>Area: </strong>' . get_string_between($notes, '[area]', '[/area]') . '</p>';
     $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
-
+    $manualjId = get_post(get_string_between($notes, '[manualj]', '[/manualj]'));
+    if(stripos($manualjId->guid, '?')) {
+      $manualj = '';
+    } else {
+      $manualj = '<p class="manualj"><strong>Manual J: </strong><a href="' . $manualjId->guid . '" target="_blank">' . basename($manualjId->guid) . '</a></p>';
+    }
     if($output) {
       if($output == 'services') { return $services; }
       elseif($output == 'sup') { return $sup; }
       elseif($output == 'sqft') { return $sqft; }
       elseif($output == 'area') { return $area; }
       elseif($output == 'address') { return $address; }
+      elseif($output == 'manualj') { return $manualj; }
+      elseif($output == 'manualj-raw') { return $manualjId; }
     } else {
-      return $services . $sup . $sqft . $area . $address;
+      return $services . $sup . $sqft . $area . $address . $manualj;
     }
   }
 
@@ -222,18 +229,16 @@
   	<?php
   }
   add_action( 'woocommerce_register_form', 'wc_register_form_password_repeat' );
-
-  function lit_woocommerce_confirm_password_validation( $posted ) {
-      $checkout = WC()->checkout;
-      if ( ! is_user_logged_in() && ( $checkout->must_create_account || ! empty( $posted['createaccount'] ) ) ) {
-          if ( strcmp( $posted['account_password'], $posted['account_confirm_password'] ) !== 0 ) {
-              wc_add_notice( __( 'Passwords do not match.', 'woocommerce' ), 'error' );
-          }
+  function ex_wcConfirmPassValidation( $posted ) {
+    $checkout = WC()->checkout;
+    if ( ! is_user_logged_in() && ( $checkout->must_create_account || ! empty( $posted['createaccount'] ) ) ) {
+      if ( strcmp( $posted['account_password'], $posted['account_confirm_password'] ) !== 0 ) {
+        wc_add_notice( __( 'Passwords do not match.', 'woocommerce' ), 'error' );
       }
+    }
   }
-  add_action( 'woocommerce_after_checkout_validation', 'lit_woocommerce_confirm_password_validation', 10, 2 );
-
-  function lit_woocommerce_confirm_password_checkout( $checkout ) {
+  add_action( 'woocommerce_after_checkout_validation', 'ex_wcConfirmPassValidation', 10, 2 );
+  function ex_wcConfirmCheckoutPass( $checkout ) {
       if ( get_option( 'woocommerce_registration_generate_password' ) == 'no' ) {
           $fields = $checkout->get_checkout_fields();
           $fields['account']['account_confirm_password'] = array(
@@ -245,7 +250,7 @@
           $checkout->__set( 'checkout_fields', $fields );
       }
   }
-  add_action( 'woocommerce_checkout_init', 'lit_woocommerce_confirm_password_checkout', 10, 1 );
+  add_action( 'woocommerce_checkout_init', 'ex_wcConfirmCheckoutPass', 10, 1 );
 
   // Force Populate Billing Fields
   function ex_wcBillingFillOut($input, $key) {
@@ -271,7 +276,7 @@
   }
   add_filter('woocommerce_save_account_details_required_fields', 'wc_save_account_details_required_fields' );
 
-  // Save Billing Info on Edit Account Page
+  // Save Billing Info & Accounts Receivable on Edit Account Page
   function ex_wcAccountDetailFields($user_id) {
     if(isset($_POST['billing_phone'])) {   update_user_meta($user_id, 'billing_phone', sanitize_text_field($_POST['billing_phone'])); }
     if(isset($_POST['billing_company'])) {   update_user_meta($user_id, 'billing_company', sanitize_text_field($_POST['billing_company'])); }
@@ -280,10 +285,31 @@
     if(isset($_POST['billing_city'])) {   update_user_meta($user_id, 'billing_city', sanitize_text_field($_POST['billing_city'])); }
     if(isset($_POST['billing_state'])) {   update_user_meta($user_id, 'billing_state', sanitize_text_field($_POST['billing_state'])); }
     if(isset($_POST['billing_postcode'])) {   update_user_meta($user_id, 'billing_postcode', sanitize_text_field($_POST['billing_postcode'])); }
+    if(isset($_POST['accounts_person'])) {   update_user_meta($user_id, 'accounts_person', sanitize_text_field($_POST['accounts_person'])); }
+    if(isset($_POST['accounts_email'])) {   update_user_meta($user_id, 'accounts_email', sanitize_text_field($_POST['accounts_email'])); }
   }
   add_action('woocommerce_save_account_details', 'ex_wcAccountDetailFields', 12, 1);
 
-
+  // Add Accounts Billable Info to signup form & Validate
+  function ex_wcAccountsReceivableValidate( $username, $email, $validation_errors ) {
+    if ( isset( $_POST['accounts_person'] ) && empty( $_POST['accounts_person'] ) ) {
+      $validation_errors->add( 'accounts_person_error', __( 'Accounts Receivable person or department is required!', 'woocommerce' ) );
+    }
+    if ( isset( $_POST['accounts_email'] ) && empty( $_POST['accounts_email'] ) ) {
+      $validation_errors->add( 'accounts_email', __( 'Accounts Receivable email is required!.', 'woocommerce' ) );
+    }
+    return $validation_errors;
+  }
+  add_action( 'woocommerce_register_post', 'ex_wcAccountsReceivableValidate', 10, 3 );
+  function ex_wcAccountsReceivableSave( $customer_id ) {
+    if ( isset( $_POST['accounts_person'] ) ) {
+      update_user_meta( $customer_id, 'accounts_person', sanitize_text_field( $_POST['accounts_person'] ) );
+    }
+    if ( isset( $_POST['accounts_email'] ) ) {
+      update_user_meta( $customer_id, 'accounts_email', sanitize_text_field( $_POST['accounts_email'] ) );
+    }
+  }
+  add_action( 'woocommerce_created_customer', 'ex_wcAccountsReceivableSave' );
 
   // Check Email Styling
   function preview_email() {

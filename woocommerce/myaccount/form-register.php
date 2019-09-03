@@ -62,11 +62,16 @@ echo ex_wrap('start', 'fullwidth');
 
 			<?php do_action( 'woocommerce_register_form' ); ?>
 
-			<header class="schedule-header">
-				<h2>Accounts Recievable</h2>
+			<header class="schedule-header accounts-receivable">
+				<h2>Accounts Receivable</h2>
 			</header>
 			<p class="woocommerce-FormRow form-row">
-
+				<label for="accounts_person"><?php esc_html_e( 'Name of person or department to invoice', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="accounts_person" id="accounts_person" />
+			</p>
+			<p class="woocommerce-FormRow form-row">
+				<label for="accounts_email"><?php esc_html_e( 'Email address to send invoices', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+				<input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="accounts_email" id="accounts_email" />
 			</p>
 
 			<p class="woocommerce-FormRow form-row cta-wrap">

@@ -17,6 +17,16 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$post_id = $post->ID;
+if ( isset( $_POST['html-upload'] ) && ! empty( $_FILES ) ) {
+	require_once( ABSPATH . 'wp-admin/includes/admin.php' );
+	$manualUpload = media_handle_upload( 'async-upload', 0 );
+	unset( $_FILES );
+	if( is_wp_error( $manualUpload ) ) {
+		$uploadError['upload_error'] = $manualUpload;
+		$manualUpload = false;
+	}
+}
 
 //do_action( 'woocommerce_before_cart' );
 
@@ -184,6 +194,27 @@ defined( 'ABSPATH' ) || exit;
 
 			// Booking Date
 			echo wc_get_formatted_cart_item_data($cart_item);
+			?>
+
+			<form id="file-form" enctype="multipart/form-data" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
+				<?php if($uploadError) { '<p>There was an error uploading your file. Please check the file format.</p>'; } ?>
+				<?php if($manualUpload): echo '<p>Your Manual J was uploaded successfully!<br /><strong>' . basename(get_attached_file($manualUpload)) . '</strong></p>'; else: ?>
+	        <div id="async-upload-wrap">
+						<label for="async-upload">Upload your Manual J (Optional, PDf format only)</label>
+						<div class="manualj-upload-fields">
+							<input type="file" id="async-upload" accept=".pdf" name="async-upload">
+							<input type="submit" value="Upload" name="html-upload">
+						</div>
+					</div>
+	        <input type="hidden" name="post_id" id="post_id" value="<?php echo $post_id ?>" />
+	        <?php wp_nonce_field( 'client-file-upload' ); ?>
+	        <input type="hidden" name="redirect_to" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
+	        <input type="submit" value="Save all changes" name="save" style="display: none;">
+				<?php endif; ?>
+	    </form>
+
+
+			<?php
 
 			// Remove
 			echo apply_filters('woocommerce_cart_item_remove_link', sprintf(
@@ -204,6 +235,7 @@ defined( 'ABSPATH' ) || exit;
 			<div class="form-row"><input type="text" id="details-address" placeholder="Address"></div>
 			<div class="form-row"><input type="text" id="details-lot" placeholder="Lot/Block #"></div>
 			<div class="form-row"><input type="text" id="details-subdivision" placeholder="Subdivision"></div>
+			<div class="form-row"><input type="hidden" id="details-manualj" placeholder="Manual J Upload" value="<?php echo $manualUpload ? $manualUpload : ''; ?>"></div>
 			<div class="form-row">
 				<input type="text" id="details-city" placeholder="City">
 				<input type="text" id="details-state" placeholder="State" maxlength="2">

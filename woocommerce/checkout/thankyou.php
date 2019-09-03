@@ -57,6 +57,8 @@ echo ex_wrap('start', 'fullwidth') . '<div class="module-inner">';
 			echo ex_wcParseNotes($note, 'area');
 			echo ex_wcParseNotes($note, 'address');
 			echo ex_wcParseNotes($note, 'sqft');
+			$manualj = ex_wcParseNotes($note, 'manualj');
+			echo $manualj ? $manualj : '';
 		echo '</section>';
 		echo ex_cta('schedule', 'Schedule Another');
     echo '<a href="' . get_permalink(wc_get_page_id('myaccount')) . '" class="order-received-accountlink inspection-cancel">Go to My Account</a>';

@@ -1,4 +1,5 @@
-#admin-account-filters {
+#admin-account-filters,
+#admin-account-browse {
   @include grid(space-between, center, row);
   width: 100%;
   margin-bottom: 2rem;
@@ -6,6 +7,7 @@
 
 .admin-account-filter {
   @include fontBold(false);
+  display: block;
   font-size: 0.5em;
   letter-spacing: 0.5ex;
   text-transform: uppercase;
@@ -21,14 +23,20 @@
     background-color: $blue;
     color: $white;
   }
+
+  &:hover {
+    background-color: darken($grey, 10%);
+  }
 }
 
-.admin-filter-date-group {
+.admin-filter-date-group,
+.admin-filter-browse-group {
   @include grid(flex-start, stretch);
   margin-right: auto;
 }
 
-.admin-filter-date-presets {
+.admin-filter-date-presets,
+.admin-filter-browse-presets {
   @include grid(flex-end, center);
   margin-left: auto;
 }
@@ -37,7 +45,7 @@
   width: auto;
 }
 
-#account-filters-submit {
+.account-filters-submit {
   @extend .cta-button;
   @extend .cta-icon-schedule;
   background-color: $grey-dark;
@@ -45,6 +53,12 @@
   width: auto;
   font-size: 0.75em;
   border-radius: 0 4px 4px 0;
+
+  &#account-browse-submit {
+    &::before {
+      @include icon(inspect-white);
+    }
+  }
 
   span {
     width: 0px;
@@ -96,8 +110,13 @@
   width: 30%;
 
   h2 {
-    font-size: 1em;
+    font-size: 1.15em;
     margin-bottom: 0.25em;
+
+    small {
+      display: block;
+      @include fontBold(false);
+    }
   }
 
   span {
@@ -162,6 +181,7 @@
 
   .supervisor {
     border-bottom: none;
+    padding-bottom: 0;
 
     strong {
       display: inline;
@@ -171,15 +191,26 @@
   .address {
     border-bottom: none;
   }
+
+  .manualj {
+    strong,
+    a {
+      display: inline-block;
+      margin: 0 0.25em 0 0;
+    }
+  }
 }
 
 @media (max-width: 768px) {
-  #admin-account-filters, {
+  #admin-account-filters,
+  #admin-account-browse {
     @include grid(center, center, column);
   }
 
   .admin-filter-date-presets,
-  .admin-filter-date-group {
+  .admin-filter-browse-presets,
+  .admin-filter-date-group,
+  .admin-filter-browse-group {
     margin: 0;
   }
 }

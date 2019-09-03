@@ -63,6 +63,14 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 		<label for="billing_postcode"><?php esc_html_e( 'ZIP', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_postcode" id="billing_postcode" autocomplete="postal-code" value="<?php echo esc_attr( $user->billing_postcode ); ?>" />
 	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--first form-row">
+		<label for="accounts_person"><?php esc_html_e( 'Name of person or department to invoice', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="accounts_person" id="accounts_person" value="<?php echo esc_attr( $user->accounts_person ); ?>" />
+	</p>
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row">
+		<label for="accounts_email"><?php esc_html_e( 'Email address to send invoices', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="accounts_email" id="accounts_email" value="<?php echo esc_attr( $user->accounts_email ); ?>" />
+	</p>
 	<fieldset>
 		<legend><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
 
