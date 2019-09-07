@@ -11,7 +11,7 @@
   $timeZone = get_option('timezone_string');
   $todayRaw = new DateTime('now', new DateTimezone($timeZone));
   $today = $todayRaw->format('Y-m-d');
-  $thisPage = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+  $thisPage = '//'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
   get_header();
     function filterButton($label, $time) {
       $filterDate = $_GET['dateFilter'];
@@ -24,7 +24,7 @@
     function browseButton($label, $status) {
       $statusFilter = $_GET['statusFilter'];
       $class = '';
-      $thisPage = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+      $thisPage = '//'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
       if($statusFilter == $status) {
         $class = ' is-active';
       }

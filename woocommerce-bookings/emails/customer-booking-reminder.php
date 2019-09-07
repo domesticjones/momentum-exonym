@@ -33,8 +33,15 @@ if ( $order ) {
 		$first_name 		= $order->get_billing_first_name();
 		$last_name  		= $order->get_billing_last_name();
 		$company				= $order->get_billing_company();
+		$address1				= $order->get_billing_address_1();
+		$address2				= $order->get_billing_address_2();
+		$city						= $order->get_billing_city();
+		$state					= $order->get_billing_state();
+		$zip						= $order->get_billing_postcode();
 		$accounts				= get_user_meta($order->user->ID, 'accounts_person')[0];
 		$accountsEmail	= get_user_meta($order->user->ID, 'accounts_email')[0];
+		$email					= $order->get_billing_email();
+		$phone					= $order->get_billing_phone();
 	}
 }
 ?>
@@ -58,16 +65,12 @@ echo esc_html( sprintf( __( 'This is a reminder that your inspection appointment
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
 	<tbody>
 		<tr>
-			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Billing Info', 'woocommerce-bookings' ); ?></th>
-			<td style="text-align:left; border: 1px solid #eee;"><?php echo $company . '<br />' . $accounts . '<br/><a href="mailto:' . $accountsEmail . '">' . $accountsEmail . '</a>'; ?></td>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment ID', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_id() ); ?></td>
 		</tr>
 		<tr>
 			<th scope="row" style="text-align:left; border: 1px solid #eee;"><?php esc_html_e( 'Inspection Request', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_product()->get_title() ); echo $services ? $services : ''; ?></td>
-		</tr>
-		<tr>
-			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment ID', 'woocommerce-bookings' ); ?></th>
-			<td style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $booking->get_id() ); ?></td>
 		</tr>
 		<?php
 		$resource = $booking->get_resource();
@@ -90,6 +93,18 @@ echo esc_html( sprintf( __( 'This is a reminder that your inspection appointment
 		<tr>
 			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Appointment Details', 'woocommerce-bookings' ); ?></th>
 			<td style="text-align:left; border: 1px solid #eee;"><?php echo ex_wcParseNotes($notes, 'sup') . ex_wcParseNotes($notes, 'sqft') . ex_wcParseNotes($notes, 'manualj'); ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Customer Info', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo $first_name . ' ' . $last_name . ' (' . $phone . ')<br /><a href="mailto:' . $email . '">' . $email . '</a>'; ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Company Info', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo $company . '<br/ >' . $address1 . '<br />' . $address2 . '<br />' . $city . ', ' . $state . ' ' . $zip; ?></td>
+		</tr>
+		<tr>
+			<th style="text-align:left; border: 1px solid #eee;" scope="row"><?php esc_html_e( 'Accounts Receivable', 'woocommerce-bookings' ); ?></th>
+			<td style="text-align:left; border: 1px solid #eee;"><?php echo $company . '<br />' . $accounts . '<br/><a href="mailto:' . $accountsEmail . '">' . $accountsEmail . '</a>'; ?></td>
 		</tr>
 		<?php /*
 		<tr>

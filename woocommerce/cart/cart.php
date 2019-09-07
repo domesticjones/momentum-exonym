@@ -200,7 +200,7 @@ if ( isset( $_POST['html-upload'] ) && ! empty( $_FILES ) ) {
 				<?php if($uploadError) { '<p>There was an error uploading your file. Please check the file format.</p>'; } ?>
 				<?php if($manualUpload): echo '<p>Your Manual J was uploaded successfully!<br /><strong>' . basename(get_attached_file($manualUpload)) . '</strong></p>'; else: ?>
 	        <div id="async-upload-wrap">
-						<label for="async-upload">Upload your Manual J (Optional, PDf format only)</label>
+						<label for="async-upload">Upload your Manual J (Optional, PDF format only)</label>
 						<div class="manualj-upload-fields">
 							<input type="file" id="async-upload" accept=".pdf" name="async-upload">
 							<input type="submit" value="Upload" name="html-upload">
