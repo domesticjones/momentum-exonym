@@ -311,6 +311,7 @@
   }
   add_action( 'woocommerce_created_customer', 'ex_wcAccountsReceivableSave' );
 
+/*
   // Check Email Styling
   function preview_email() {
     global $booking;
@@ -321,3 +322,4 @@
     return null;
   }
   add_action('wp_ajax_previewemail', 'preview_email');
+*/

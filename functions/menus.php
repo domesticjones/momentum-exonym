@@ -13,6 +13,7 @@ register_nav_menus(
   array(
     'header-menu' => __('Header', 'exonym'),
     'services-menu' => __('Services', 'exonym'),
-    'responsive-menu' => __('Responsinve', 'exonym')
+    'responsive-menu' => __('Responsinve', 'exonym'),
+    'quicklinks-menu' => __('Quick Links', 'exonym')
   )
 );

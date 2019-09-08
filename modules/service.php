@@ -18,7 +18,6 @@ echo ex_wrap('end');
 echo ex_wrap('start', 'fullwidth');
   echo '<div class="module-inner">';
     the_field('description');
-    the_post_thumbnail();
   echo '</div>';
 echo ex_wrap('end');
 if(have_rows('files') || have_rows('links')) {

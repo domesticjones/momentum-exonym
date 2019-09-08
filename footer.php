@@ -50,11 +50,13 @@
 				<div class="footer-column footer-quick footer-column-border">
 					<nav class="footer-nav" role="navigation">
 						<h3 class="footer-title">Quick Links</h3>
-						<ul>
-							<li><?php echo ex_cta('schedule', 'Schedule Test'); ?></li>
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">Contact</a></li>
-						</ul>
+						<?php
+							echo ex_cta('schedule', 'Schedule Test');
+							wp_nav_menu(array(
+								'container' => false,
+								'theme_location' => 'quicklinks-menu',
+							));
+						?>
 					</nav>
 				</div>
 				<div class="footer-column footer-contact footer-column-border">
