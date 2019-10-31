@@ -130,8 +130,7 @@ if ( $order ) {
 		<?php endif; ?>
 	</tbody>
 </table>
-
-<p><?php echo wc_get_privacy_policy_text('checkout'); ?></p>
+<p style="font-weight: bold; text-align: center; color: #b53737;"><?php echo wc_get_privacy_policy_text('checkout'); ?></p>
 <p style="font-size: 1.25em; font-weight: bold; text-align: center;">If anything about this inspection needs to change, please <a href="<?php echo home_url('/contact'); ?>">Contact Us</a><small style="display: block; font-size: 0.75em"></small></p>
 
 <?php do_action( 'woocommerce_email_footer' ); ?>

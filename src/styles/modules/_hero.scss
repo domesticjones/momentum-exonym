@@ -28,6 +28,10 @@ body.hero-image-top {
 
 .hero-fullscreen {
   min-height: 100vh;
+
+  .cta-wrap {
+    @include grid(flex-start, center, row, wrap);
+  }
 }
 
 .hero-grad {
@@ -102,5 +106,10 @@ body.hero-image-top {
 
   .hero-affiliates {
     display: none;
+  }
+
+
+  .hero-fullscreen .cta-wrap {
+    @include grid(center, center, row, wrap);
   }
 }

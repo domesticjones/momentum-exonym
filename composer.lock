@@ -370,15 +370,15 @@
         },
         {
             "name": "wpackagist-plugin/disable-gutenberg",
-            "version": "1.8.1",
+            "version": "1.9",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/disable-gutenberg/",
-                "reference": "tags/1.8.1"
+                "reference": "tags/1.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/disable-gutenberg.1.8.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/disable-gutenberg.1.9.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -450,15 +450,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-taxonomy-ordering",
-            "version": "2.0.3",
+            "version": "2.1.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-taxonomy-ordering/",
-                "reference": "tags/2.0.3"
+                "reference": "tags/2.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-taxonomy-ordering.2.0.3.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-taxonomy-ordering.2.1.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -470,15 +470,15 @@
         },
         {
             "name": "wpackagist-plugin/woo-preview-emails",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woo-preview-emails/",
-                "reference": "tags/1.5.1"
+                "reference": "tags/1.5.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woo-preview-emails.1.5.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/woo-preview-emails.1.5.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -510,15 +510,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-sweep",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-sweep/",
-                "reference": "tags/1.1.0"
+                "reference": "tags/1.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-sweep.1.1.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-sweep.1.1.1.zip",
                 "reference": null,
                 "shasum": null
             },

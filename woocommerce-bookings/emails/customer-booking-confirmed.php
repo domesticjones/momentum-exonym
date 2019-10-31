@@ -123,9 +123,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</tbody>
 </table>
 
-<p><?php echo wc_get_privacy_policy_text('checkout'); ?></p>
+<p style="font-weight: bold; text-align: center; color: #b53737;"><?php echo wc_get_privacy_policy_text('checkout'); ?></p>
 <p style="font-size: 1.25em; font-weight: bold; text-align: center;">If anything about this inspection has changed, please <a href="<?php echo home_url('/contact'); ?>">Contact Us</a><small style="display: block; font-size: 0.75em"></small></p>
-
 	<?php do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
 
 	<?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email ); ?>

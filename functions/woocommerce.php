@@ -46,7 +46,7 @@
 ?>
   <form id="checkout_form" method="POST" action="<?php echo $checkoutUrl; ?>">
     <input type="hidden" name="customer_notes" id="customer_notes" value="">
-        <?php echo ex_cta('arrow', 'Review &amp; Complete Appointment', '#'); ?>
+    <?php echo ex_cta('arrow', 'Review &amp; Complete Appointment', '#'); ?>
   </form>
 <?php
   }
@@ -62,7 +62,7 @@
     if(!empty($areaRaw)) {
       $area = '<br />' . $areaRaw;
     }
-    $sup = '<p class="supervisor"><strong>Site Supervisor: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
+    $sup = '<p class="supervisor"><strong>Builder: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
     $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
     $area = '<p class="area">' . '<strong>Area: </strong>' . get_string_between($notes, '[area]', '[/area]') . '</p>';
     $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
