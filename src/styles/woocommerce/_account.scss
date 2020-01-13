@@ -271,6 +271,7 @@ a.account-schedule-cta {
     .account-nav {
       &-dashboard a::before { @include icon(dashboard-white); }
       &-schedule a::before { @include icon(calendar-white); }
+      &-clients a::before { @include icon(building-white); }
       &-orders a::before { @include icon(inspect-white); }
       &-profile a::before { @include icon(user-white); }
       &-logout a::before { @include icon(logout-white); }

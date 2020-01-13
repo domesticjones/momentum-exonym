@@ -38,11 +38,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'meta_value' => 'admin-bookings.php'
 				];
 				$adminBookingPage = get_posts($adminBookingPageFind);
+				$adminClientsPageFind = [
+					'post_type' => 'page',
+					'fields' => 'ids',
+					'nopaging' => true,
+					'meta_key' => '_wp_page_template',
+					'meta_value' => 'admin-clients.php'
+				];
+				$adminClientsPage = get_posts($adminClientsPageFind);
 		    $timeZone = get_option('timezone_string');
 				$todayRaw = new DateTime('now', new DateTimezone($timeZone));
 			?>
 				<li class="account-nav-dashboard<?php if(is_account_page() && !is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('dashboard'); ?>"><span>Dashboard</span><i>Dashboard</i></a></li>
 				<li class="account-nav-schedule<?php if(get_the_id() == $adminBookingPage[0]) { echo ' is-active'; } ?>"><a href="<?php echo get_permalink($adminBookingPage[0]) . '?statusFilter=pending-confirmation'; ?>"><span>View Appointments</span><i>Appointments</i></a></li>
+				<li class="account-nav-clients<?php if(get_the_id() == $adminClientsPage[0]) { echo ' is-active'; } ?>"><a href="<?php echo get_permalink($adminClientsPage[0]); ?>"><span>View Clients</span><i>Clients</i></a></li>
 				<li class="account-nav-profile<?php if(is_wc_endpoint_url('edit-account')) { echo ' is-active'; } ?>"><a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>"><span>Account Details</span><i>Profile</i></a></li>
 				<?php if(current_user_can('administrator')) { echo '<li class="account-nav-logout"><a href="' . get_admin_url() . '"><span>WP Admin</span><i>WP Admin</i></a></li>'; } ?>
 				<li class="account-nav-logout"><a href="<?php echo wc_get_account_endpoint_url('logout'); ?>"><span>Logout</span><i>Logout</i></a></li>

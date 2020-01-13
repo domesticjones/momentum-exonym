@@ -1,0 +1,29 @@
+#admin-clients {
+  width: 100%;
+  font-size: 0.75rem;
+
+  th {
+    background-color: $grey-medium;
+    font-size: 0.75em;
+    padding: 1em 0.5em;
+    text-align: left;
+  }
+
+  td {
+    border-bottom: 1px solid $grey-dark;
+    padding: 0.25em;
+    @include transition();
+  }
+
+  p {
+    padding: 0;
+  }
+
+  strong {
+    font-size: 1.25em;
+  }
+
+  tr:hover td {
+    background-color: $grey;
+  }
+}
