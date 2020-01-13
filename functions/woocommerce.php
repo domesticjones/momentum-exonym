@@ -4,7 +4,7 @@
   	add_theme_support('woocommerce');
   }
   add_action('after_setup_theme', 'ex_woocommerce_support');
-  
+
   // Redirect login requests to Account page
   function ex_redirect_wc_public(){
     global $pagenow;
