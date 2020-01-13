@@ -181,6 +181,22 @@ a.account-schedule-cta {
   }
 }
 
+.lost_reset_password {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .woocommerce-Button {
+    width: auto;
+    display: inline-block;
+    background-color: $blue;
+    color: $white;
+    height: auto;
+    border-radius: 0.5em;
+    border: none;
+  }
+}
+
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */

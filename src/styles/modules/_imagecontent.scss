@@ -1,5 +1,13 @@
 .module-imagecontent {
   padding: 4rem;
+
+  &.imagecontent-noimg {
+    .module-inner {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+  }
 }
 
 .imagecontent-align {
@@ -114,6 +122,10 @@
 @media (max-width: 960px) {
   .module-imagecontent {
     padding: 56.25vw 0 0 0;
+
+    &.imagecontent-noimg {
+      padding-top: 0;
+    }
 
     .module-inner { width: 100%; }
 

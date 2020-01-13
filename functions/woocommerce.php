@@ -4,7 +4,7 @@
   	add_theme_support('woocommerce');
   }
   add_action('after_setup_theme', 'ex_woocommerce_support');
-
+  
   // Redirect login requests to Account page
   function ex_redirect_wc_public(){
     global $pagenow;
@@ -62,7 +62,7 @@
     if(!empty($areaRaw)) {
       $area = '<br />' . $areaRaw;
     }
-    $sup = '<p class="supervisor"><strong>Builder: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
+    $sup = '<p class="supervisor"><strong>Builder/HVAC: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
     $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
     $area = '<p class="area">' . '<strong>Area: </strong>' . get_string_between($notes, '[area]', '[/area]') . '</p>';
     $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
