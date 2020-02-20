@@ -82,8 +82,8 @@ if ( isset( $_POST['html-upload'] ) && ! empty( $_FILES ) ) {
 			<div class="form-row"><input type="text" id="details-supervisor-name" placeholder="Builder/HVAC Name"></div>
 			<div class="form-row"><input type="text" id="details-supervisor-phone" placeholder="Best Contact Phone"></div>
 			<div class="form-row"><input type="number" id="details-sqft" placeholder="Total Square Feet"></div>
-			<div class="form-row"><input type="text" id="details-lot" placeholder="Lot/Block #"></div>
 			<div class="form-row"><input type="text" id="details-subdivision" placeholder="Subdivision"></div>
+			<div class="form-row"><input type="text" id="details-lot" placeholder="Lot/Block #"></div>
 			<div class="form-row"><input type="text" id="details-address" placeholder="Address"></div>
 			<div class="form-row">
 				<input type="text" id="details-city" placeholder="City">

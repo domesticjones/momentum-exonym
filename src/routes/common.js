@@ -100,7 +100,7 @@ export default {
       }
       let areaPrint = '';
       if(lot.length > 0 || subdivision.length > 0) {
-        areaPrint = `[area]${lot} - ${subdivision}[/area]`;
+        areaPrint = `[area][lot]${lot}[/lot] - [sub]${subdivision}[/sub][/area]`;
       }
       const details = `${servicesPrint}[sup]${sup} (${supTel})[/sup][sqft]${sqft} sqft[/sqft]${areaPrint}[address]${address}[/address][locale]${city}, ${state} ${zip}[/locale][manualj]${manualj}[/manualj]`;
       $('#customer_notes_text').val(details);
@@ -109,7 +109,7 @@ export default {
       if(sup.length && supTel.length && sqft.length && lot.length && subdivision.length && city.length && state.length && zip.length) {
         $('#checkout_form').submit();
       } else {
-        alert('Supervisor name, phone, total square feet, lot, subdivision, and city/state/zip are required.');
+        alert('Builder name, contact phone, total square feet, lot, subdivision, and city/state/zip are required.');
       }
     });
 

@@ -5,7 +5,6 @@
   die;
 
 
-
   get_header();
   if(have_posts()) {
     echo '<h1>Resources Archive</h1>';

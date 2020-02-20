@@ -64,7 +64,13 @@
     }
     $sup = '<p class="supervisor"><strong>Builder/HVAC: </strong>' . get_string_between($notes, '[sup]', '[/sup]') . '</p>';
     $sqft = '<p class="sqft"><strong>Square Feet: </strong>' . get_string_between($notes, '[sqft]', '[/sqft]') . '</p>';
-    $area = '<p class="area">' . '<strong>Area: </strong>' . get_string_between($notes, '[area]', '[/area]') . '</p>';
+    $lot = get_string_between($notes, '[lot]', '[/lot]');
+    $sub = get_string_between($notes, '[sub]', '[/sub]');
+    if($sub || $lot) {
+      $area = '<p class="area">' . '<strong>Area: </strong>' . $lot . ' - ' . $sub . '</p>';
+    } else {
+      $area = '<p class="area">' . '<strong>Area: </strong>' . get_string_between($notes, '[area]', '[/area]') . '</p>';
+    }
     $address = '<p class="address"><strong>Address: </strong>' . get_string_between($notes, '[address]', '[/address]') . '<br />' . get_string_between($notes, '[locale]', '[/locale]') . '</p>';
     $manualjId = get_post(get_string_between($notes, '[manualj]', '[/manualj]'));
     if(stripos($manualjId->guid, '?')) {
@@ -76,10 +82,12 @@
       if($output == 'services') { return $services; }
       elseif($output == 'sup') { return $sup; }
       elseif($output == 'sqft') { return $sqft; }
+      elseif($output == 'lot') { return $lot; }
+      elseif($output == 'sub') { return $sub; }
       elseif($output == 'area') { return $area; }
       elseif($output == 'address') { return $address; }
       elseif($output == 'manualj') { return $manualj; }
-      elseif($output == 'manualj-raw') { return $manualjId; }
+      elseif($output == 'manualj-raw') { return $manualjId->guid; }
     } else {
       return $services . $sup . $sqft . $area . $address . $manualj;
     }
