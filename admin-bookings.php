@@ -99,6 +99,7 @@
                 $nameFirst = $ord->get_billing_first_name();
                 $nameLast = $ord->get_billing_last_name();
                 $confirm = wp_nonce_url(admin_url('admin-ajax.php?action=wc-booking-confirm&booking_id=' . $id), 'wc-booking-confirm');
+
                 $statusConfirm = '';
                 if($status == 'pending-confirmation') {
                   $status = 'pending';
