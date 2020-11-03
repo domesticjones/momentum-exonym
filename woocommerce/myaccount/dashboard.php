@@ -31,6 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       '<strong>' . esc_html( $current_user->first_name) . '</strong>',
       esc_url( wc_logout_url( wc_get_page_permalink( 'myaccount' ) ) )
     );
+
   ?>
   <div class="account-data-left">
 		<?php
