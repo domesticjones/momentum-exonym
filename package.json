@@ -10,7 +10,7 @@
   "author": "jaredpalmer",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jquery-visible": "^1.2.0"
   },
   "devDependencies": {
