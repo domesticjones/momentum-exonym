@@ -6,6 +6,39 @@ body.hero-image-top {
   }
 }
 
+.hero-image-only {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  &-content {
+    position: relative;
+    @include grid(space-between, center);
+    padding: 4em 2em;
+
+    .calltoaction {
+      margin-right: 2em;
+      transform: scale(1.25);
+      transform-origin: right center;
+
+      .cta-wrap {
+        margin: 0;
+      }
+    }
+  }
+
+  .hero-affiliates {
+    right: unset;
+    left: 2em;
+    bottom: calc(100% + 2em);
+  }
+}
+
 .module-hero {
   @include grid(flex-start, center);
   padding: 6rem 2rem;
@@ -23,6 +56,10 @@ body.hero-image-top {
     @include fontItalic();
     font-size: 3em;
     margin-bottom: 1em;
+  }
+
+  &.hero-image {
+    padding: 0;
   }
 }
 
@@ -85,6 +122,21 @@ body.hero-image-top {
 /**
   Responsive Breakpoints
   ---------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero-image-only-content {
+    @include grid(center, center, column);
+
+    .text {
+      text-align: center;
+    }
+
+    .calltoaction {
+      margin: 2em auto;
+      transform-origin: center center;
+    }
+  }
+}
+
 @media (max-width: 600px) {
   .module-hero {
     @include grid(center, center, column);

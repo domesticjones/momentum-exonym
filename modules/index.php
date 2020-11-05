@@ -30,7 +30,7 @@
 
   function ex_contentBodyClass($classes) {
     $modulesFirst = get_field('modules', $page->ID)[0];
-    if($modulesFirst['acf_fc_layout'] == 'hero_image' && $modulesFirst['hero_image_type'] == 'fullscreen' && get_post_type() == 'page') {
+    if($modulesFirst['acf_fc_layout'] == 'hero_image' && ($modulesFirst['hero_image_type'] == 'fullscreen' || $modulesFirst['hero_image_type'] == 'image') && get_post_type() == 'page') {
       $classes[] = 'hero-image-top';
     }
     return $classes;

@@ -93,7 +93,7 @@ export default {
       const state = $('#details-state').val();
       const zip = $('#details-zip').val();
       const manualj = $('#details-manualj').val();
-      const services = $('.alg-pif-dd').text();
+      const services = $('#product-service').text();
       let servicesPrint = '';
       if(services.length > 0) {
         servicesPrint = `[services]${services}[/services]`;

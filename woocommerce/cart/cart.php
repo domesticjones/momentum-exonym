@@ -39,7 +39,7 @@ if ( isset( $_POST['html-upload'] ) && ! empty( $_FILES ) ) {
 			$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 
 			// Name & Services
-			echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', '<h2>' . $_product->get_name() . '</h2>', $cart_item, $cart_item_key ) . '&nbsp;' );
+			echo '<div id="product-service">' . wp_kses_post( apply_filters( 'woocommerce_cart_item_name', '<h2>' . $_product->get_name() . '</h2>', $cart_item, $cart_item_key ) . '&nbsp;' ) . '</div>';
 
 			// Booking Date
 			echo wc_get_formatted_cart_item_data($cart_item);

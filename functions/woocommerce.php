@@ -43,12 +43,12 @@
   }
   function woocommerce_button_proceed_to_checkout() {
     $checkoutUrl = get_permalink(wc_get_page_id('checkout'));
-?>
-  <form id="checkout_form" method="POST" action="<?php echo $checkoutUrl; ?>">
-    <input type="hidden" name="customer_notes" id="customer_notes" value="">
-    <?php echo ex_cta('arrow', 'Review &amp; Complete Appointment', '#'); ?>
-  </form>
-<?php
+    ?>
+      <form id="checkout_form" method="POST" action="<?php echo $checkoutUrl; ?>">
+        <input type="hidden" name="customer_notes" id="customer_notes" value="">
+        <?php echo ex_cta('arrow', 'Review &amp; Complete Appointment', '#'); ?>
+      </form>
+    <?php
   }
   function ex_wcParseNotes($origin, $output = null) {
     $notes = sanitize_text_field($origin);

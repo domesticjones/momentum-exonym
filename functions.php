@@ -4,6 +4,7 @@
   [[[ Global Theme Functions ]]]
 ================================
 */
+
 require_once('functions/security.php');
 require_once('functions/config.php');
 require_once('functions/cleanup.php');
@@ -20,7 +21,7 @@ require_once('functions/woocommerce.php');
 
 /**
  * Theme assets
- */
+*/
 add_action('wp_enqueue_scripts', function () {
     $manifest = json_decode(file_get_contents('build/assets.json', true));
     $main = $manifest->main;
